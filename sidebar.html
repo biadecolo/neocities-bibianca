@@ -1,0 +1,60 @@
+<div class="intro-text">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <pattern id="squircle" patternUnits="userSpaceOnUse" width="200" height="200">
+            <image href="assets/pfpbia.png" x="0" y="0" width="200" height="200" />
+            </pattern>
+        </defs>
+        <path d="M100,200c43.8,0,68.2,0,84.1-15.9C200,168.2,200,143.8,200,100s0-68.2-15.9-84.1C168.2,0,143.8,0,100,0S31.8,0,15.9,15.9C0,31.8,0,56.2,0,100s0,68.2,15.9,84.1C31.8,200,56.2,200,100,200z" 
+              fill="url(#squircle)" />
+    </svg>
+    <p data-i18n-en="i'm &lt;strong&gt;bia (she/her).&lt;/strong&gt; this is my little corner of the internet. if you stop by, please &lt;mark&gt;&lt;a href=&quot;https://bibi.atabook.org/&quot; target=&quot;_blank&quot;&gt;sign my guestbook&lt;/a&gt;&lt;/mark&gt; so i can know who you are! &lt;img src=&quot;assets/porquinho.png&quot; class=&quot;emoji-img&quot;&gt;">eiiii, eu sou a <strong>bia (she/her).</strong> esse é meu cantinho na internet. se passar por aqui, <mark><a href="https://bibi.atabook.org/" target="_blank">assina o meu guestbook</a></mark> pra eu te conhecer <img src="assets/porquinho.png" class="emoji-img"></p>
+</div>
+
+<nav class="menu">
+    <a href="index.html" class="menu-item" data-page="inicio">
+        <img src="assets/0landline.png" class="menu-icon"> <span data-i18n-en="home">começo</span>
+    </a>
+    <a href="about.html" class="menu-item" data-page="inicio">
+        <img src="assets/0camera.png" class="menu-icon"> <span data-i18n-en="who even are you">mona quem eh vc</span>
+    </a>
+    <a href="leitura.html" class="menu-item" data-page="leitura">
+        <img src="assets/0laptop.png" class="menu-icon"> <span data-i18n-en="reading">leitura</span>
+    </a>
+    <a href="shrines.html" class="menu-item" data-page="shrines">
+        <img src="assets/0radio.png" class="menu-icon"> <span data-i18n-en="shrines">shrines</span>
+    </a>
+    <a href="daily.html" class="menu-item" data-page="daily">
+        <img src="assets/0joystick.png" class="menu-icon"> <span data-i18n-en="every sunday">todo domingo</span>
+    </a>
+    <a href="galeria.html" class="menu-item" data-page="galeria">
+        <img src="assets/0camera.png" class="menu-icon"> <span data-i18n-en="gallery">galeria</span>
+    </a>
+    <a href="creditos.html" class="menu-item" data-page="credt">
+        <img src="assets/0tv.png" class="menu-icon"> <span data-i18n-en="links">links</span>
+    </a>
+</nav>
+
+<button id="lang-toggle" onclick="toggleLang()" style="
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    z-index: 9999;
+    background: #eef1ea;
+    color: #2d5a27;
+    border-radius: 8px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+"onmouseout="this.style.transform='translate(0px, 0px)';"><img src="https://flagcdn.com/w20/br.png" alt="PT-BR" style="vertical-align: middle; border-radius: 2px;"> <span style="opacity: 0.5"><img src="https://flagcdn.com/w20/gb.png" alt="EN-GB" style="vertical-align: middle; border-radius: 2px;"></span></button>
+
+<div class="lastfm-widget">
+    <img src="assets/0radio.png" alt="radio">
+    <div>
+        <div class="label" data-i18n-en="now playing">no ouvido</div>
+        <div id="song">carregando...</div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>galeria – webcantinho da bia</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/porquinho.png">
+</head>
+<body>
+    <div class="background-overlay">
+        <div class="main-window">
+            <aside class="sidebar"></aside>
+
+            <section class="content-area">
+                <div class="content-box">
+                    <h2 data-i18n-en="gallery">galeria</h2>
+                    <p data-i18n-en="a little space for my scanned creations and other physical media 🎨">um espacinho pras minhas invenções de moda escaneadas e outras mídias físicas 🎨</p>
+
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="assets/artsybibi/colagem1.jpg" alt="descrição da arte 1">
+                            <span class="gallery-label" data-i18n-en="collage">colagem com coisinha de revista</span>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/artsybibi/colagem2.jpg" alt="descrição da arte 2">
+                            <span class="gallery-label" data-i18n-en="collage">colagem com coisinha de revista</span>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/artsybibi/colagem3.jpg" alt="descrição da arte 3">
+                            <span class="gallery-label" data-i18n-en="collage">colagem com coisinha de revista</span>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/artsybibi/desenhotomate1.jpg" alt="descrição da arte 4">
+                            <span class="gallery-label" data-i18n-en="colored pencil drawing">desenho com lápis de cor</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="footer-placeholder"></div>
+        <small style="color: #fff"><span data-i18n-en="this site looks kinda rough on mobile. sorry! 🌻">esse site fica meio paia no mobile. me desculpa! 🌻</span></small>
+    </div>
+
+    <!-- Modal (Lightbox) -->
+    <div id="image-modal" class="modal" onclick="this.style.display='none'">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="modal-caption"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
