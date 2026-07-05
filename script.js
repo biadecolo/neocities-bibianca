@@ -27,6 +27,23 @@ async function loadSidebar() {
         const active = aside.querySelector(`[data-page="${page}"]`);
         if (active) active.classList.add('active');
 
+        // ── menu hambúrguer (só aparece no mobile via CSS) ──
+        const menuToggle = aside.querySelector('#menu-toggle');
+        const menu = aside.querySelector('#site-menu');
+        if (menuToggle && menu) {
+            menuToggle.addEventListener('click', () => {
+                const isOpen = menu.classList.toggle('open');
+                menuToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+            // fecha o menu automaticamente ao navegar pra outra página
+            menu.addEventListener('click', (e) => {
+                if (e.target.closest('a')) {
+                    menu.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
         // ── last.fm: carrega a música depois que a sidebar for inserida na tela
         let user = 'biadecolo';
         let url = 'https://lastfm-last-played.biancarosa.com.br/' + user + '/latest-song';

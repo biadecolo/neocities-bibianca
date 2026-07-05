@@ -27,13 +27,19 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
     font-family: var(--font-main);
     background-color: var(--bg-green);
     background-image: url('assets/bg.png');
     background-size: cover;
     background-position: center;
     overflow-x: hidden;
+}
+
+/* overflow-y só no html: senão o body vira um contexto de rolagem próprio
+   aninhado dentro do html, e a página passa a rolar "por dentro" do body
+   em vez da janela (window.scrollY para de acompanhar o scroll real) */
+html {
+    height: 100%;
     overflow-y: scroll; /* barra de rolagem sempre reservada, pra não pular o layout quando o conteúdo passa a precisar dela */
 }
 
@@ -123,6 +129,40 @@ mark a{
     gap: 8px;
 }
 
+/* botão hambúrguer: só existe visualmente no mobile (ver media query abaixo) */
+.menu-toggle {
+    display: none;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+    background: var(--menu-bg);
+    border: none;
+    border-radius: 12px;
+    padding: 10px 15px;
+    margin-top: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a4a4a;
+    cursor: pointer;
+}
+
+.menu-toggle-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 18px;
+    flex-shrink: 0;
+}
+
+.menu-toggle-icon span {
+    display: block;
+    height: 2px;
+    border-radius: 1px;
+    background: #4a4a4a;
+}
+
 .menu-item {
     display: flex;
     align-items: center;
@@ -200,6 +240,7 @@ mark a{
     border-radius: 25px;
     padding: 35px;
     overflow-y: auto;
+    overscroll-behavior-y: contain; /* trava o scroll interno na própria caixa, sem vazar e mover a tela quando chega no fim */
     max-height: 726px; /* alinhado com a altura da sidebar, fixo em todas as páginas */
     font-size: 0.85rem;
     color: #444;
@@ -234,8 +275,21 @@ mark a{
     min-height: 92px;
 }
 
+/* aviso é só pra quem tá no celular; escondido no desktop pra não empurrar
+   a janela pra além da altura da tela e forçar scroll à toa */
+.mobile-notice {
+    display: none;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .mobile-notice {
+        display: block;
+    }
+}
+
 .footer-bar {
-    width: 940px; /* Ocupa a largura total da janela ou do container pai */
+    width: 95%; /* acompanha a mesma lógica responsiva da .main-window */
     max-width: 940px; /* Limita ao tamanho da janela branca se quiseres alinhado */
     background: white;
     height: 52px;
@@ -773,3 +827,104 @@ mark a{
             border-radius: 12px;
             margin: 0 0 20px 20px;
         }
+
+/* --- RESPONSIVO (MOBILE) ---
+   Reflow leve: mantém o visual (janela branca, sidebar, cores), mas empilha
+   a sidebar acima do conteúdo e deixa larguras/imagens encolherem pra caber. */
+@media (max-width: 768px) {
+    .main-window {
+        flex-direction: column;
+        padding: 20px;
+        min-height: auto;
+    }
+
+    /* avatar (svg só com viewBox) normalmente estica pra preencher a largura
+       da sidebar via align-items:stretch; no mobile isso ficava enorme.
+       140px = 70% do tamanho de antes (200px, largura da sidebar no desktop) */
+    .intro-text svg {
+        display: block;
+        width: 140px;
+        height: 140px;
+        margin: 0 auto 4px;
+    }
+
+    .sidebar {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto 20px;
+    }
+
+    .content-area {
+        margin-left: 0;
+        max-width: 100%;
+    }
+
+    .content-box {
+        padding: 20px;
+        /* na desktop a caixa tem altura fixa pra alinhar com a sidebar ao lado;
+           empilhada, ela pode só crescer com o conteúdo e deixar a página inteira rolar */
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    /* pixel art decorativa ao lado do content-box; sem espaço sobrando pra ela no mobile */
+    .side-pixel-art {
+        display: none;
+    }
+
+    /* home: intro e to-do empilham em vez de 2 colunas */
+    .home-top {
+        grid-template-columns: 1fr;
+    }
+
+    /* timeline (todo domingo): reduz a coluna de data pra sobrar mais espaço pro texto */
+    .timeline {
+        padding-left: 60px;
+    }
+
+    .entry-date {
+        left: -60px;
+        width: 50px;
+    }
+
+    .book-entry {
+        grid-template-columns: 70px 1fr;
+        gap: 12px;
+    }
+
+    .book-cover {
+        width: 70px;
+        height: 100px;
+    }
+
+    /* menu vira hambúrguer: some a lista, mostra o botão, só reabre com .open */
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* fica sempre flex (precisa, pra dar pra animar) e o colapso é via
+       max-height + opacity; o valor de max-height só precisa ser maior
+       que o conteúdo real, não afeta o tempo real da transição */
+    .menu {
+        display: flex;
+        overflow: hidden;
+        max-height: 0;
+        margin-top: 0;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: max-height 0.3s ease, opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .menu.open {
+        max-height: 400px;
+        margin-top: 8px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* plantinhas fixas no canto some no mobile: some espaço, e no fixed
+       elas ficam por cima do conteúdo numa tela pequena */
+    img.plantinhas {
+        display: none;
+    }
+}
