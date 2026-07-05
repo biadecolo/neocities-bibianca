@@ -30,11 +30,11 @@ body, html {
     height: 100%;
     font-family: var(--font-main);
     background-color: var(--bg-green);
-    background-image: url('assets/bg.png'); 
+    background-image: url('assets/bg.png');
     background-size: cover;
     background-position: center;
     overflow-x: hidden;
-    
+    overflow-y: scroll; /* barra de rolagem sempre reservada, pra não pular o layout quando o conteúdo passa a precisar dela */
 }
 
 .background-overlay {
@@ -42,8 +42,16 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 20px;
+}
+
+/* centraliza verticalmente quando cabe na tela, mas sem empurrar o conteúdo
+   pra fora do topo (e exigir scroll) quando ele é mais alto que o viewport */
+.background-overlay > *:first-child {
+    margin-top: auto;
+}
+.background-overlay > *:last-child {
+    margin-bottom: auto;
 }
 .spacer40px{
   padding: 40px;
@@ -191,8 +199,8 @@ mark a{
     flex-grow: 1;
     border-radius: 25px;
     padding: 35px;
-    overflow-y: auto;   /* ← adiciona */
-    max-height: 650px;  /* ← adiciona */
+    overflow-y: auto;
+    max-height: 726px; /* alinhado com a altura da sidebar, fixo em todas as páginas */
     font-size: 0.85rem;
     color: #444;
     line-height: 1.75;
@@ -220,6 +228,11 @@ mark a{
 }
 
 /* --- FOOTER CORRIGIDO E RESPONSIVO --- */
+
+/* reserva o espaço do footer (carregado via fetch) pra não pular o layout quando ele chega */
+#footer-placeholder {
+    min-height: 92px;
+}
 
 .footer-bar {
     width: 940px; /* Ocupa a largura total da janela ou do container pai */
@@ -428,6 +441,7 @@ mark a{
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
+            align-items: start;
         }
 
         /* coluna da intro */

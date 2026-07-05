@@ -117,8 +117,8 @@
 
             <section class="content-area">
                 <div class="content-box" id="main-content">
-                    <a class="back-link" href="leitura.html">← voltar pra leitura</a>
-                    <p class="state-msg" id="loading-msg">carregando review...</p>
+                    <a class="back-link" href="leitura.html" data-i18n-en="← back to reading">← voltar pra leitura</a>
+                    <p class="state-msg" id="loading-msg" data-i18n-en="loading review...">carregando review...</p>
                 </div>
 
                 <div class="side-pixel-art">
@@ -141,7 +141,7 @@
             </div>
         </footer>
 
-        <small style="color: #fff">esse site fica meio paia no mobile. me desculpa! 🌻</small>
+        <small style="color: #fff"><span data-i18n-en="this site looks kinda rough on mobile. sorry! 🌻">esse site fica meio paia no mobile. me desculpa! 🌻</span></small>
     </div>
 
     <script src="script.js"></script>
@@ -151,7 +151,7 @@
         function formatDate(str) {
             if (!str) return '';
             const d = new Date(str + 'T00:00:00');
-            return d.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+            return d.toLocaleDateString(getLang() === 'en' ? 'en-US' : 'pt-BR', { month: 'long', year: 'numeric' });
         }
 
         function renderStars(nota) {
@@ -176,7 +176,7 @@
             const loadingMsg = document.getElementById('loading-msg');
 
             if (!id) {
-                loadingMsg.textContent = 'livro não encontrado 😿';
+                loadingMsg.textContent = getLang() === 'en' ? 'book not found 😿' : 'livro não encontrado 😿';
                 return;
             }
 
@@ -186,7 +186,7 @@
                 const [book] = await res.json();
 
                 if (!book) {
-                    loadingMsg.textContent = 'esse livro não existe... 🤔';
+                    loadingMsg.textContent = getLang() === 'en' ? "this book doesn't exist... 🤔" : 'esse livro não existe... 🤔';
                     return;
                 }
 
@@ -214,8 +214,9 @@
                 `;
 
             } catch (err) {
-                document.getElementById('loading-msg').textContent =
-                    'ops, não consegui carregar essa review 😿';
+                document.getElementById('loading-msg').textContent = getLang() === 'en'
+                    ? "oops, couldn't load this review 😿"
+                    : 'ops, não consegui carregar essa review 😿';
             }
         }
 
