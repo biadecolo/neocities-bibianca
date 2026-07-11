@@ -1,6 +1,6 @@
 /* Configurações Gerais */
 :root {
-    --window-width: 940px;
+    --window-width: 1200px;
     --bg-green: #2d5a27;
     --accent-green: #c5e1b9;
     --menu-bg: #eef1ea;
@@ -178,6 +178,13 @@ mark a{
 .menu-item:hover { background: #e2e8de; }
 .menu-item.active { background: var(--accent-green); }
 
+/* item de menu ainda sem página/link (ex: blog) */
+.menu-item-disabled {
+    cursor: default;
+    opacity: 0.55;
+}
+.menu-item-disabled:hover { background: var(--menu-bg); }
+
 .menu-icon { 
     width: 18px; 
     margin-right: 12px; 
@@ -226,6 +233,34 @@ mark a{
     display: block;
 }
 
+/* Coluna Lateral Direita */
+.sidebar-right {
+    width: 200px;
+    flex-shrink: 0;
+    margin-left: 20px;
+}
+
+.sidebar-right-content {
+    background: var(--menu-bg);
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-align: center;
+}
+
+/* espaço consistente entre os widgets empilhados na coluna direita,
+   independente da ordem/tipo de cada um */
+.sidebar-right > * + * {
+    margin-top: 16px;
+}
+
+.sidebar-right-placeholder {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #888;
+    font-style: italic;
+    text-align: center;
+}
+
 /* Área de Conteúdo */
 .content-area {
     flex-grow: 1;
@@ -245,6 +280,39 @@ mark a{
     font-size: 0.85rem;
     color: #444;
     line-height: 1.75;
+}
+
+/* scroll bonitinho na home: barra verde clarinha, sem as setinhas.
+   aplicado no <html> (que é quem realmente mostra a barra, forçada
+   sempre visível lá em cima por overflow-y:scroll) e também no
+   .content-box, caso o conteúdo interno dele passe a rolar também */
+html.home,
+.home-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-green) transparent;
+}
+
+html.home::-webkit-scrollbar,
+.home-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+html.home::-webkit-scrollbar-track,
+.home-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+html.home::-webkit-scrollbar-thumb,
+.home-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--accent-green);
+    border-radius: 10px;
+}
+
+html.home::-webkit-scrollbar-button,
+.home-scroll::-webkit-scrollbar-button {
+    display: none;
+    height: 0;
+    width: 0;
 }
 
 .content-box p {
@@ -273,6 +341,7 @@ mark a{
 /* reserva o espaço do footer (carregado via fetch) pra não pular o layout quando ele chega */
 #footer-placeholder {
     min-height: 92px;
+    align-self: stretch; /* sem isso ele encolhe pro conteúdo (align-items:center do pai) e a % de largura da .footer-bar calcula errado, ficando mais estreita que a .main-window */
 }
 
 /* aviso é só pra quem tá no celular; escondido no desktop pra não empurrar
@@ -290,7 +359,7 @@ mark a{
 
 .footer-bar {
     width: 95%; /* acompanha a mesma lógica responsiva da .main-window */
-    max-width: 940px; /* Limita ao tamanho da janela branca se quiseres alinhado */
+    max-width: var(--window-width); /* sempre alinhado à largura da janela branca */
     background: white;
     height: 52px;
     margin: 20px auto; /* Centraliza a barra */
@@ -435,8 +504,8 @@ mark a{
         }
 
         .shrine-grid {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             overflow-y: auto;
         }
@@ -448,7 +517,6 @@ mark a{
             height: 130px;
             text-decoration: none;
             display: block;
-            flex-shrink: 0;
         }
 
         .shrine-card img {
@@ -590,6 +658,37 @@ mark a{
         .status-list li strong {
             color: #2d5a27;
             font-weight: 600;
+        }
+
+        .changelog-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 140px;
+            overflow-y: auto;
+        }
+
+        .changelog-list li {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            font-size: 0.8rem;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        .changelog-date {
+            flex-shrink: 0;
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #2d5a27;
+            background: #e2e8de;
+            padding: 2px 8px;
+            border-radius: 20px;
         }
 
         .home-cats {
@@ -872,8 +971,20 @@ mark a{
         display: none;
     }
 
+    /* coluna lateral direita: some da linha e empilha abaixo do conteúdo */
+    .sidebar-right {
+        width: 100%;
+        max-width: 320px;
+        margin: 16px auto 0;
+    }
+
     /* home: intro e to-do empilham em vez de 2 colunas */
     .home-top {
+        grid-template-columns: 1fr;
+    }
+
+    /* shrines: 1 coluna só no mobile */
+    .shrine-grid {
         grid-template-columns: 1fr;
     }
 

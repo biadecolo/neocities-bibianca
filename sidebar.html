@@ -18,26 +18,29 @@
 
 <nav class="menu" id="site-menu">
     <a href="index.html" class="menu-item" data-page="inicio">
-        <img src="assets/0landline.png" class="menu-icon"> <span data-i18n-en="home">começo</span>
+        <img src="assets/menu-icons/comeco.png" class="menu-icon"> <span data-i18n-en="home">começo</span>
     </a>
     <a href="about.html" class="menu-item" data-page="inicio">
-        <img src="assets/0camera.png" class="menu-icon"> <span data-i18n-en="who even are you">mona quem eh vc</span>
+        <img src="assets/menu-icons/about.png" class="menu-icon"> <span data-i18n-en="who even are you">mona quem eh vc</span>
     </a>
     <a href="leitura.html" class="menu-item" data-page="leitura">
-        <img src="assets/0laptop.png" class="menu-icon"> <span data-i18n-en="reading">leitura</span>
+        <img src="assets/menu-icons/leitura.png" class="menu-icon"> <span data-i18n-en="reading">leitura</span>
     </a>
     <a href="shrines.html" class="menu-item" data-page="shrines">
-        <img src="assets/0radio.png" class="menu-icon"> <span data-i18n-en="shrines">shrines</span>
+        <img src="assets/menu-icons/shrines.png" class="menu-icon"> <span data-i18n-en="shrines">shrines</span>
     </a>
     <a href="daily.html" class="menu-item" data-page="daily">
-        <img src="assets/0joystick.png" class="menu-icon"> <span data-i18n-en="every sunday">todo domingo</span>
+        <img src="assets/menu-icons/tododomingo.png" class="menu-icon"> <span data-i18n-en="every sunday">todo domingo</span>
     </a>
     <a href="galeria.html" class="menu-item" data-page="galeria">
-        <img src="assets/0camera.png" class="menu-icon"> <span data-i18n-en="gallery">galeria</span>
+        <img src="assets/menu-icons/galeria.png" class="menu-icon"> <span data-i18n-en="gallery">galeria</span>
     </a>
     <a href="creditos.html" class="menu-item" data-page="credt">
-        <img src="assets/0tv.png" class="menu-icon"> <span data-i18n-en="colophon">colofão</span>
+        <img src="assets/menu-icons/colofao.png" class="menu-icon"> <span data-i18n-en="colophon">colofão</span>
     </a>
+    <span class="menu-item menu-item-disabled" data-page="blog">
+        <img src="assets/menu-icons/blog.png" class="menu-icon"> <span data-i18n-en="blog (soon)">blog (soon)</span>
+    </span>
 </nav>
 
 <button id="lang-toggle" onclick="toggleLang()" style="
@@ -55,11 +58,3 @@
     font-weight: 600;
     transition: all 0.2s ease;
 "onmouseout="this.style.transform='translate(0px, 0px)';"><img src="https://flagcdn.com/w20/br.png" alt="PT-BR" style="vertical-align: middle; border-radius: 2px;"> <span style="opacity: 0.5"><img src="https://flagcdn.com/w20/gb.png" alt="EN-GB" style="vertical-align: middle; border-radius: 2px;"></span></button>
-
-<div class="lastfm-widget">
-    <img src="assets/0radio.png" alt="radio">
-    <div>
-        <div class="label" data-i18n-en="now playing">no ouvido</div>
-        <div id="song">carregando...</div>
-    </div>
-</div>

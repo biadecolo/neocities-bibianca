@@ -44,10 +44,30 @@ async function loadSidebar() {
             });
         }
 
-        // ── last.fm: carrega a música depois que a sidebar for inserida na tela
+    } catch (err) {
+        console.error('erro ao carregar sidebar:', err);
+    }
+}
+
+loadSidebar();
+
+// ── coluna lateral direita compartilhada ─────────────────────────
+// Carrega o sidebar-right.html e injeta no <aside class="sidebar-right">
+async function loadSidebarRight() {
+    const aside = document.querySelector('aside.sidebar-right');
+    if (!aside) return;
+
+    try {
+        const res = await fetch('sidebar-right.html');
+        const html = await res.text();
+        aside.innerHTML = html;
+
+        if (typeof applyLang === 'function') applyLang(getLang());
+
+        // ── last.fm: carrega a música depois que a sidebar direita for inserida na tela
         let user = 'biadecolo';
         let url = 'https://lastfm-last-played.biancarosa.com.br/' + user + '/latest-song';
-        let song = document.querySelector('#song');
+        let song = aside.querySelector('#song');
         if (song) {
             fetch(url)
                 .then(response => response.json())
@@ -55,13 +75,12 @@ async function loadSidebar() {
                     song.innerHTML = json['track']['name'] + ' - ' + json['track']['artist']['#text'];
                 });
         }
-
     } catch (err) {
-        console.error('erro ao carregar sidebar:', err);
+        console.error('erro ao carregar sidebar-right:', err);
     }
 }
 
-loadSidebar();
+loadSidebarRight();
 
 window.addEventListener("load", () => {
     new cursoreffects.fairyDustCursor({
