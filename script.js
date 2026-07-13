@@ -123,6 +123,42 @@ fetch('head.html')
     })
     .catch(error => console.error('Erro ao carregar o head:', error));
 
+// ── carrossel de imagens dos shrines ───────────────────────────────
+document.querySelectorAll(".shrine-carousel").forEach(carousel => {
+    const track = carousel.querySelector(".shrine-carousel-track");
+    const slides = Array.from(track.children);
+    const dotsWrap = carousel.querySelector(".carousel-dots");
+    let index = 0;
+
+    slides.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.className = "carousel-dot" + (i === 0 ? " active" : "");
+        dot.addEventListener("click", () => goTo(i));
+        dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function goTo(i) {
+        index = (i + slides.length) % slides.length;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((d, di) => d.classList.toggle("active", di === index));
+    }
+
+    carousel.querySelector(".carousel-prev").addEventListener("click", () => goTo(index - 1));
+    carousel.querySelector(".carousel-next").addEventListener("click", () => goTo(index + 1));
+});
+
+// ── galeria: ordem aleatória a cada visita ────────────────────────
+const galleryGrid = document.querySelector(".gallery-grid");
+if (galleryGrid) {
+    const items = Array.from(galleryGrid.children);
+    for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+    }
+    items.forEach(item => galleryGrid.appendChild(item));
+}
+
 // ── galeria lightbox ─────────────────────────────────────────────
 const modal = document.getElementById("image-modal");
 if (modal) {

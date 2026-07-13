@@ -20,6 +20,14 @@
 
                     <div class="gallery-grid">
                         <div class="gallery-item">
+                            <img src="assets/artsybibi/vermelhovivo.jpg" alt="pintura vermelho vivo">
+                            <span class="gallery-label" data-i18n-en="acrylic painting on canvas - 'vivid red'">tinta acrílica em tela - "vermelho vivo"</span>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/artsybibi/teimar-em-ver.jpg" alt="pintura teimar em ver, beleza em tudo">
+                            <span class="gallery-label" data-i18n-en="acrylic painting on kraft paper - 'insist on seeing beauty in everything'">pintura com tinta acrílica em papel kraft - "teimar em ver beleza em tudo"</span>
+                        </div>
+                        <div class="gallery-item">
                             <img src="assets/artsybibi/colagem1.jpg" alt="descrição da arte 1">
                             <span class="gallery-label" data-i18n-en="collage">colagem com coisinha de revista</span>
                         </div>
@@ -53,11 +61,18 @@
         <small class="mobile-notice"><span data-i18n-en="this site looks kinda rough on mobile. sorry! 🌻">esse site fica meio paia no mobile. me desculpa! 🌻</span></small>
     </div>
 
-    <!-- Modal (Lightbox) -->
+    <!-- Modal (Lightbox) estilo janela retrô -->
     <div id="image-modal" class="modal" onclick="this.style.display='none'">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="modal-img">
-        <div id="modal-caption"></div>
+        <div class="retro-window" onclick="event.stopPropagation()">
+            <div class="retro-titlebar">
+                <span class="retro-title">🖼 image.jpg</span>
+                <span class="close-modal" onclick="document.getElementById('image-modal').style.display='none'">✕</span>
+            </div>
+            <div class="retro-window-body">
+                <img class="modal-content" id="modal-img">
+                <div id="modal-caption"></div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
