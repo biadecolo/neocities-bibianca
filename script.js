@@ -1,6 +1,6 @@
 (function() {
     const s = document.createElement('script');
-    s.src = 'lang.js?v=20260714';
+    s.src = '/lang.js?v=20260714';
     s.onload = () => applyLang(getLang());
     document.head.appendChild(s);
 })();
@@ -10,7 +10,7 @@ async function loadSidebar() {
     if (!aside) return;
 
     try {
-        const res = await fetch('sidebar.html');
+        const res = await fetch('/sidebar.html');
         const html = await res.text();
         aside.innerHTML = html;
 
@@ -53,7 +53,7 @@ async function loadSidebarRight() {
     if (!aside) return;
 
     try {
-        const res = await fetch('sidebar-right.html');
+        const res = await fetch('/sidebar-right.html');
         const html = await res.text();
         aside.innerHTML = html;
 
@@ -93,7 +93,7 @@ function initBanners() {
 function loadFooter() {
     const footerPlaceholder = document.getElementById('footer-placeholder');
     if (footerPlaceholder) {
-        fetch('footer.html')
+        fetch('/footer.html')
             .then(response => response.text())
             .then(data => {
                 footerPlaceholder.innerHTML = data;
@@ -153,6 +153,7 @@ function initGalleryLightbox() {
             img.addEventListener("click", function() {
                 modal.style.display = "flex";
                 modalImg.src = this.src;
+                modalImg.alt = this.alt;
                 const label = this.nextElementSibling;
                 captionText.innerHTML = label ? label.innerHTML : this.alt;
             });
@@ -202,16 +203,215 @@ function executeInlineScripts(container) {
     });
 }
 
+const COMMENTS_API = 'https://bibianca-comments.biancadecolo.workers.dev';
+const COMMENTS_ADMIN_TOKEN_KEY = 'bibianca_admin_token';
+const COMMENT_EDIT_TOKEN_PREFIX = 'comment_edit_';
+
+function formatCommentDate(iso) {
+    try {
+        return new Date(iso).toLocaleDateString(getLang() === 'en' ? 'en-GB' : 'pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+    } catch {
+        return iso;
+    }
+}
+
+function renderComment(c) {
+    const li = document.createElement('li');
+    li.className = 'comment-item';
+    li.dataset.id = c.id;
+
+    const meta = document.createElement('div');
+    meta.className = 'comment-meta';
+    const author = document.createElement('span');
+    author.className = 'comment-author';
+    author.textContent = c.author;
+    const time = document.createElement('time');
+    time.className = 'comment-date';
+    time.dateTime = c.created_at;
+    time.textContent = formatCommentDate(c.created_at) + (c.updated_at ? ' (editado)' : '');
+    meta.append(author, time);
+
+    const body = document.createElement('p');
+    body.className = 'comment-body';
+    body.textContent = c.body;
+    li.append(meta, body);
+
+    const actions = document.createElement('div');
+    actions.className = 'comment-actions';
+
+    const editToken = localStorage.getItem(COMMENT_EDIT_TOKEN_PREFIX + c.id);
+    if (editToken) {
+        const edit = document.createElement('button');
+        edit.type = 'button';
+        edit.className = 'comment-edit';
+        edit.textContent = 'editar';
+        edit.addEventListener('click', () => startCommentEdit(c, li, body, time, editToken));
+        actions.appendChild(edit);
+    }
+
+    const adminToken = localStorage.getItem(COMMENTS_ADMIN_TOKEN_KEY);
+    if (adminToken) {
+        const del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'comment-delete';
+        del.textContent = 'excluir';
+        del.addEventListener('click', () => deleteComment(c.id, li, adminToken));
+        actions.appendChild(del);
+    }
+
+    if (actions.children.length) li.appendChild(actions);
+
+    return li;
+}
+
+function startCommentEdit(c, li, bodyEl, timeEl, editToken) {
+    const textarea = document.createElement('textarea');
+    textarea.className = 'comment-edit-textarea';
+    textarea.value = c.body;
+    textarea.maxLength = 2000;
+    bodyEl.replaceWith(textarea);
+    textarea.focus();
+
+    const controls = document.createElement('div');
+    controls.className = 'comment-edit-controls';
+    const saveBtn = document.createElement('button');
+    saveBtn.type = 'button';
+    saveBtn.textContent = 'salvar';
+    const cancelBtn = document.createElement('button');
+    cancelBtn.type = 'button';
+    cancelBtn.textContent = 'cancelar';
+    controls.append(saveBtn, cancelBtn);
+    textarea.insertAdjacentElement('afterend', controls);
+
+    cancelBtn.addEventListener('click', () => {
+        controls.remove();
+        textarea.replaceWith(bodyEl);
+    });
+
+    saveBtn.addEventListener('click', async () => {
+        const newBody = textarea.value.trim();
+        if (!newBody) return;
+        saveBtn.disabled = true;
+        try {
+            const res = await fetch(`${COMMENTS_API}/comments/${c.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ body: newBody, editToken }),
+            });
+            if (res.status === 200) {
+                const data = await res.json();
+                c.body = newBody;
+                c.updated_at = data.updated_at;
+                bodyEl.textContent = newBody;
+                timeEl.textContent = formatCommentDate(c.created_at) + ' (editado)';
+                controls.remove();
+                textarea.replaceWith(bodyEl);
+            } else if (res.status === 401) {
+                alert('não foi possível editar esse comentário (token inválido)');
+                localStorage.removeItem(COMMENT_EDIT_TOKEN_PREFIX + c.id);
+            } else {
+                alert('erro ao salvar');
+            }
+        } catch {
+            alert('erro de rede ao salvar');
+        } finally {
+            saveBtn.disabled = false;
+        }
+    });
+}
+
+async function deleteComment(id, li, token) {
+    if (!confirm('excluir esse comentário?')) return;
+    try {
+        const res = await fetch(`${COMMENTS_API}/comments/${id}`, {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.status === 204) {
+            li.remove();
+        } else if (res.status === 401) {
+            alert('token inválido');
+            localStorage.removeItem(COMMENTS_ADMIN_TOKEN_KEY);
+        } else {
+            alert('erro ao excluir');
+        }
+    } catch {
+        alert('erro de rede ao excluir');
+    }
+}
+
+function loadComments(section, pageId) {
+    const list = section.querySelector('.comments-list');
+    const empty = section.querySelector('.comments-empty');
+    const errorEl = section.querySelector('.comments-error');
+
+    list.innerHTML = '';
+    empty.hidden = true;
+    errorEl.hidden = true;
+
+    fetch(`${COMMENTS_API}/comments?pageId=${encodeURIComponent(pageId)}`)
+        .then(res => { if (!res.ok) throw new Error('bad status'); return res.json(); })
+        .then(data => {
+            const comments = data.comments || [];
+            if (comments.length === 0) { empty.hidden = false; return; }
+            comments.forEach(c => list.appendChild(renderComment(c)));
+        })
+        .catch(() => { errorEl.hidden = false; });
+}
+
+function initComments(container) {
+    const section = container.querySelector('.comments-section');
+    if (!section) return;
+
+    const pageId = section.dataset.pageId;
+    const form = section.querySelector('.comments-form');
+    const renderedAt = Date.now();
+
+    loadComments(section, pageId);
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const statusEl = form.querySelector('.comments-form-status');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        try {
+            const res = await fetch(`${COMMENTS_API}/comments`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pageId, author: form.author.value, body: form.body.value, hp: form.hp.value, ts: renderedAt }),
+            });
+            if (res.status === 201) {
+                const data = await res.json().catch(() => null);
+                if (data && data.id && data.editToken) {
+                    localStorage.setItem(COMMENT_EDIT_TOKEN_PREFIX + data.id, data.editToken);
+                }
+                form.reset();
+                statusEl.hidden = true;
+                loadComments(section, pageId);
+            } else {
+                statusEl.hidden = false;
+                statusEl.textContent = 'não foi possível enviar. tente de novo.';
+            }
+        } catch {
+            statusEl.hidden = false;
+            statusEl.textContent = 'erro de rede. tente de novo.';
+        } finally {
+            submitBtn.disabled = false;
+        }
+    });
+}
+
 function initContent(container) {
     if (typeof applyLang === 'function') applyLang(getLang());
     initShrineCarousels();
     initGalleryShuffle();
     initGalleryLightbox();
     initCopyCode();
+    initComments(container);
     executeInlineScripts(container);
 }
 
-fetch('head.html')
+fetch('/head.html')
     .then(response => response.text())
     .then(data => {
         document.head.insertAdjacentHTML('beforeend', data);

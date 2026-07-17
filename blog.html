@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n-en="bibi's web corner">diário – webcantinho da bia</title>
+    <title data-i18n-en="bibi's web corner">blog – webcantinho da bia</title>
     <link rel="stylesheet" href="style.css?v=20260717">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/porquinho.png">
+    <link rel="alternate" type="application/rss+xml" title="blog – webcantinho da bia" href="feed.xml">
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://a.doce.sh/js/pa-MqS-ZH1OYWx0aYhiF3Hmj.js"></script>
     <script>
@@ -17,27 +18,25 @@
 <body>
     <div class="background-overlay">
         <div class="main-window">
-
-            <aside class="sidebar">
-            </aside>
-
+            <aside class="sidebar"></aside>
             <section class="content-area">
                 <div class="content-box">
-                    <h2 data-i18n-en="manifesto">manifesto</h2>
-                    <p data-i18n-en="i figured the best place to complain about the world as it is today, and the whole social media thing etc, was a page set aside just for that.">imaginei que o melhor lugar pra reclamar do mundo como é hoje e as variáveis de redes sociais e etc fosse uma página separada exclusivamente pra isso.</p>
-                    <p data-i18n-en="my friend &lt;mark&gt;&lt;a href=&quot;http://dede.com.br/&quot;&gt;dedé&lt;/a&gt;&lt;/mark&gt;">o meu amigo <mark><a href="http://dede.com.br/">dedé</a></mark></p>
+                    <h2><span data-i18n-en="blog">blog</span></h2>
+                    <p class="shrine-description" data-i18n-en="random thoughts, longer than a changelog entry and shorter than a diary">pensamentos soltos, maiores que uma linha de changelog e menores que um diário</p>
+                    <div class="blog-list">
+                        <a class="blog-entry" href="dez-curiosidades.html">
+                            <span class="blog-date">17 jul 2026</span>
+                            <h3 class="blog-title" data-i18n-en="ten random facts">dez curiosidades</h3>
+                            <p class="blog-excerpt" data-i18n-en="sharing ten little things about me and taking part in my first entreblogs tag :)">compartilhando dez coisinhas sobre mim e participando da minha primeira tag do entreblogs :)</p>
+                        </a>
                     </div>
                 </div>
             </section>
             <aside class="sidebar-right"></aside>
-
         </div>
-
         <div id="footer-placeholder"></div>
-
         <small class="mobile-notice"><span data-i18n-en="this site looks kinda rough on mobile. sorry! 🌻">esse site fica meio paia no mobile. me desculpa! 🌻</span></small>
     </div>
-
     <script src="script.js?v=20260717"></script>
 </body>
 </html>

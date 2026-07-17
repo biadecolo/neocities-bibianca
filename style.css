@@ -239,6 +239,111 @@ mark a{
     line-height: 1.2;
 }
 
+.webring-box {
+    background: var(--menu-bg);
+    border-radius: 12px;
+    padding: 12px 16px;
+    text-align: center;
+}
+
+.webring-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.webring-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.webring-links a {
+    font-size: 0.78rem;
+    color: #2d5a27;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.webring-links a:hover {
+    text-decoration: underline;
+}
+
+.webcirculo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.webcirculo-flag {
+    display: block;
+    line-height: 0;
+}
+
+.webcirculo-flag img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+    transition: transform 0.15s ease;
+}
+
+.webcirculo-flag:hover img {
+    transform: scale(1.04);
+}
+
+.webcirculo-random {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--bg-green);
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+}
+
+.webcirculo-random:hover {
+    text-decoration: underline;
+}
+
+.brsnoneocities-label {
+    margin: 0 0 8px;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    color: #555;
+}
+
+.brsnoneocities-random {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--bg-green);
+    background: var(--accent-green);
+    padding: 5px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+}
+
+.brsnoneocities-random:hover {
+    opacity: 0.8;
+}
+
+.exemplo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
 .plantinhas {
     position: fixed;
     right: 30px;
@@ -474,6 +579,310 @@ html.home::-webkit-scrollbar-button,
             margin-bottom: 0;
         }
 
+        .blog-rss-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #aaa;
+            font-size: 0.68rem;
+            line-height: 1.4;
+            opacity: 0.7;
+        }
+
+        .blog-rss-row:hover {
+            opacity: 1;
+            color: #888;
+        }
+
+        .blog-rss-icon {
+            width: 13px;
+            height: 13px;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .blog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .blog-post-image-wrap {
+            margin: 16px 0;
+        }
+
+        .blog-post-image {
+            display: block;
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .blog-post-image-caption {
+            display: block;
+            margin-top: 4px;
+            font-size: 0.68rem;
+            color: #999;
+        }
+
+        .blog-entry {
+            display: block;
+            padding: 16px 18px;
+            background: #eef7ea;
+            border-radius: 14px;
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.15s ease;
+        }
+
+        .blog-entry:hover {
+            background: var(--accent-green);
+        }
+
+        .blog-date {
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        .blog-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            line-height: 1.3;
+            margin: 4px 0;
+            transition: color 0.15s ease;
+        }
+
+        .blog-entry:hover .blog-title {
+            color: var(--bg-green);
+        }
+
+        .blog-excerpt {
+            font-size: 0.82rem;
+            color: #555;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .comments-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--menu-bg);
+            border-radius: 16px;
+        }
+
+        .comments-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--bg-green);
+            margin: 0 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .comments-title::before {
+            content: "💬";
+            font-size: 0.9em;
+        }
+
+        .comments-list {
+            list-style: none;
+            margin: 0 0 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .comment-item {
+            background: white;
+            border-radius: 12px;
+            padding: 12px 14px;
+            border: 1px solid #eef1ea;
+        }
+
+        .comment-meta {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .comment-author {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .comment-date {
+            font-size: 0.7rem;
+            color: #999;
+        }
+
+        .comment-body {
+            font-size: 0.82rem;
+            color: #444;
+            line-height: 1.6;
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .comment-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .comment-edit,
+        .comment-delete {
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .comment-edit {
+            color: var(--bg-green);
+        }
+
+        .comment-edit:hover {
+            color: #1a3a16;
+        }
+
+        .comment-delete {
+            color: #b34a4a;
+        }
+
+        .comment-delete:hover {
+            color: #8a2f2f;
+        }
+
+        .comment-edit-textarea {
+            width: 100%;
+            font-family: var(--font-main);
+            font-size: 0.82rem;
+            color: #444;
+            padding: 6px 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .comment-edit-textarea:focus {
+            outline: none;
+            border-color: var(--bg-green);
+        }
+
+        .comment-edit-controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .comment-edit-controls button {
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            text-decoration: underline;
+            color: var(--bg-green);
+        }
+
+        .comment-edit-controls button:last-child {
+            color: #777;
+        }
+
+        .comments-empty,
+        .comments-error {
+            font-size: 0.8rem;
+            color: #777;
+            font-style: italic;
+            margin: 0 0 20px;
+        }
+
+        .comments-form {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .comments-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .comments-field input,
+        .comments-field textarea {
+            font-family: var(--font-main);
+            font-size: 0.85rem;
+            color: #333;
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            resize: vertical;
+        }
+
+        .comments-field textarea {
+            min-height: 70px;
+        }
+
+        .comments-field input:focus,
+        .comments-field textarea:focus {
+            outline: none;
+            border-color: var(--bg-green);
+        }
+
+        .comments-hp {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .comments-form button[type="submit"] {
+            align-self: flex-start;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            background: var(--bg-green);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: opacity 0.15s ease;
+        }
+
+        .comments-form button[type="submit"]:hover {
+            opacity: 0.85;
+        }
+
+        .comments-form button[type="submit"]:disabled {
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .comments-form-status {
+            font-size: 0.75rem;
+            color: #b34a4a;
+            margin: 0;
+        }
+
         .book-link {
             order: 5;
             display: inline-block;
@@ -517,6 +926,10 @@ html.home::-webkit-scrollbar-button,
             line-height: 1.6;
             margin-bottom: 20px;
             font-style: italic;
+        }
+
+        .content-box p.shrine-notice {
+            margin-top: 20px;
         }
 
         .shrine-grid {

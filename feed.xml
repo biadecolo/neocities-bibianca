@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+    <title>blog – webcantinho da bia</title>
+    <link>https://bibianca.neocities.org/blog.html</link>
+    <atom:link href="https://bibianca.neocities.org/feed.xml" rel="self" type="application/rss+xml" />
+    <description>pensamentos soltos, maiores que uma linha de changelog e menores que um diário</description>
+    <language>pt-br</language>
+
+    <item>
+        <title>dez curiosidades</title>
+        <link>https://bibianca.neocities.org/dez-curiosidades.html</link>
+        <guid>https://bibianca.neocities.org/dez-curiosidades.html</guid>
+        <description>participando de uma colab do entreblogs: dez fatos aleatórios sobre a minha vida, de seita a paraglider</description>
+        <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+</channel>
+</rss>
