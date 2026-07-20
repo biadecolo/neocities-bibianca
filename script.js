@@ -215,26 +215,41 @@ function formatCommentDate(iso) {
     }
 }
 
-function renderComment(c) {
+function renderComment(c, ctx) {
     const li = document.createElement('li');
-    li.className = 'comment-item';
+    li.className = 'comment-item' + (c.is_admin ? ' comment-item--admin' : '');
     li.dataset.id = c.id;
 
     const meta = document.createElement('div');
     meta.className = 'comment-meta';
-    const author = document.createElement('span');
+    const author = document.createElement(c.site ? 'a' : 'span');
     author.className = 'comment-author';
     author.textContent = c.author;
+    if (c.site) {
+        author.href = c.site;
+        author.target = '_blank';
+        author.rel = 'noopener nofollow ugc';
+    }
+    meta.appendChild(author);
     const time = document.createElement('time');
     time.className = 'comment-date';
     time.dateTime = c.created_at;
     time.textContent = formatCommentDate(c.created_at) + (c.updated_at ? ' (editado)' : '');
-    meta.append(author, time);
+    meta.appendChild(time);
+    li.appendChild(meta);
+
+    const parent = c.parent_id ? ctx.byId[c.parent_id] : null;
+    if (parent && parent.parent_id) {
+        const replyTo = document.createElement('p');
+        replyTo.className = 'comment-reply-to';
+        replyTo.textContent = `respondendo a ${parent.author}`;
+        li.appendChild(replyTo);
+    }
 
     const body = document.createElement('p');
     body.className = 'comment-body';
     body.textContent = c.body;
-    li.append(meta, body);
+    li.appendChild(body);
 
     const actions = document.createElement('div');
     actions.className = 'comment-actions';
@@ -259,9 +274,116 @@ function renderComment(c) {
         actions.appendChild(del);
     }
 
-    if (actions.children.length) li.appendChild(actions);
+    const reply = document.createElement('button');
+    reply.type = 'button';
+    reply.className = 'comment-reply';
+    reply.textContent = 'responder';
+    reply.addEventListener('click', () => startCommentReply(c, li, ctx, adminToken));
+    actions.appendChild(reply);
+
+    li.appendChild(actions);
+
+    if (!c.parent_id) {
+        const repliesList = document.createElement('ul');
+        repliesList.className = 'comment-replies';
+        li.appendChild(repliesList);
+    }
 
     return li;
+}
+
+function startCommentReply(c, li, ctx, adminToken) {
+    if (li.querySelector('.comment-reply-form')) return;
+
+    const form = document.createElement('div');
+    form.className = 'comment-reply-form';
+
+    let nameInput, siteInput, hpInput;
+    if (!adminToken) {
+        nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.placeholder = 'seu nome';
+        nameInput.maxLength = 60;
+        nameInput.className = 'comment-reply-input';
+        form.appendChild(nameInput);
+
+        siteInput = document.createElement('input');
+        siteInput.type = 'text';
+        siteInput.placeholder = 'seu site (opcional)';
+        siteInput.maxLength = 200;
+        siteInput.className = 'comment-reply-input';
+        form.appendChild(siteInput);
+
+        hpInput = document.createElement('input');
+        hpInput.type = 'text';
+        hpInput.tabIndex = -1;
+        hpInput.autocomplete = 'off';
+        hpInput.className = 'comments-hp';
+        form.appendChild(hpInput);
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.className = 'comment-edit-textarea';
+    textarea.placeholder = 'escreva sua resposta...';
+    textarea.maxLength = 2000;
+    form.appendChild(textarea);
+
+    const controls = document.createElement('div');
+    controls.className = 'comment-edit-controls';
+    const sendBtn = document.createElement('button');
+    sendBtn.type = 'button';
+    sendBtn.textContent = 'enviar';
+    const cancelBtn = document.createElement('button');
+    cancelBtn.type = 'button';
+    cancelBtn.textContent = 'cancelar';
+    controls.append(sendBtn, cancelBtn);
+    form.appendChild(controls);
+
+    const repliesList = li.querySelector('.comment-replies');
+    li.insertBefore(form, repliesList || null);
+    (nameInput || textarea).focus();
+
+    cancelBtn.addEventListener('click', () => form.remove());
+
+    sendBtn.addEventListener('click', async () => {
+        const replyBody = textarea.value.trim();
+        if (!replyBody) return;
+        if (!adminToken && !nameInput.value.trim()) { nameInput.focus(); return; }
+        sendBtn.disabled = true;
+        try {
+            const payload = { pageId: ctx.pageId, body: replyBody, parentId: c.id, ts: ctx.renderedAt };
+            const fetchHeaders = { 'Content-Type': 'application/json' };
+            if (adminToken) {
+                fetchHeaders.Authorization = `Bearer ${adminToken}`;
+            } else {
+                payload.author = nameInput.value.trim();
+                payload.site = siteInput.value.trim();
+                payload.hp = hpInput.value;
+            }
+            const res = await fetch(`${COMMENTS_API}/comments`, {
+                method: 'POST',
+                headers: fetchHeaders,
+                body: JSON.stringify(payload),
+            });
+            if (res.status === 201) {
+                const resData = await res.json().catch(() => null);
+                if (!adminToken && resData && resData.id && resData.editToken) {
+                    localStorage.setItem(COMMENT_EDIT_TOKEN_PREFIX + resData.id, resData.editToken);
+                }
+                form.remove();
+                ctx.reload();
+            } else if (res.status === 401) {
+                alert('token inválido');
+                localStorage.removeItem(COMMENTS_ADMIN_TOKEN_KEY);
+            } else {
+                alert('erro ao responder');
+            }
+        } catch {
+            alert('erro de rede ao responder');
+        } finally {
+            sendBtn.disabled = false;
+        }
+    });
 }
 
 function startCommentEdit(c, li, bodyEl, timeEl, editToken) {
@@ -354,7 +476,32 @@ function loadComments(section, pageId) {
         .then(data => {
             const comments = data.comments || [];
             if (comments.length === 0) { empty.hidden = false; return; }
-            comments.forEach(c => list.appendChild(renderComment(c)));
+
+            const byId = {};
+            comments.forEach(c => { byId[c.id] = c; });
+
+            function rootIdOf(c) {
+                let cur = c;
+                while (cur.parent_id && byId[cur.parent_id]) cur = byId[cur.parent_id];
+                return cur.id;
+            }
+
+            const topLevel = comments.filter(c => !c.parent_id);
+            const repliesByRoot = {};
+            comments.filter(c => c.parent_id).forEach(c => {
+                const rootId = rootIdOf(c);
+                (repliesByRoot[rootId] ||= []).push(c);
+            });
+
+            const ctx = { pageId, renderedAt: Date.now(), reload: () => loadComments(section, pageId), byId };
+            topLevel.forEach(c => {
+                const li = renderComment(c, ctx);
+                const repliesList = li.querySelector('.comment-replies');
+                (repliesByRoot[c.id] || []).forEach(r => {
+                    repliesList.appendChild(renderComment(r, ctx));
+                });
+                list.appendChild(li);
+            });
         })
         .catch(() => { errorEl.hidden = false; });
 }
@@ -378,7 +525,7 @@ function initComments(container) {
             const res = await fetch(`${COMMENTS_API}/comments`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ pageId, author: form.author.value, body: form.body.value, hp: form.hp.value, ts: renderedAt }),
+                body: JSON.stringify({ pageId, author: form.author.value, site: form.site ? form.site.value : '', body: form.body.value, hp: form.hp.value, ts: renderedAt }),
             });
             if (res.status === 201) {
                 const data = await res.json().catch(() => null);

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>webringue</title>
+    <link rel="icon" type="image/png" href="assets/webring.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            position: relative;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0; gap: 32px;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-color: #c5e1b9;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' shape-rendering='crispEdges'%3E%3Crect width='40' height='40' fill='%23c5e1b9'/%3E%3Cpolygon points='20,10 22.35,16.76 29.51,16.91 23.80,21.24 25.88,28.09 20,24 14.12,28.09 16.20,21.24 10.49,16.91 17.65,16.76' fill='%23eef1ea'/%3E%3C/svg%3E");
+            background-size: 40px 40px;
+            image-rendering: pixelated;
+            animation: bg-scroll 6s linear infinite;
+        }
+        @keyframes bg-scroll {
+            from { background-position: 0 0; }
+            to { background-position: 40px 40px; }
+        }
+        .webring-logo { width: 619px; max-width: 90vw; margin-bottom: -16px; }
+        .webring-tagline { font-family: 'Press Start 2P', monospace; font-size: 11px; line-height: 1.6; color: #2d5a27; text-align: center; margin: 0; max-width: 420px; }
+        .amigos-row { display: flex; gap: 24px; }
+        .amigo { position: relative; }
+        .amigo-link { display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; color: inherit; }
+        .amigo img.avatar { image-rendering: pixelated; width: 160px; height: 160px; display: block; transition: transform 0.15s ease; }
+        .amigo:hover img.avatar { transform: scale(1.15); }
+        .amigo-name { font-family: 'Press Start 2P', monospace; font-size: 12px; }
+        .amigo-preview {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            margin-top: 30px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .amigo:hover .amigo-preview { opacity: 1; visibility: visible; }
+        .amigo-preview img.print { display: block; width: 100%; height: auto; }
+        .webring-footer { font-family: 'Lexend', sans-serif; font-size: 12px; color: #2d5a27; text-align: center; margin: 0; opacity: 0.8; }
+        .webring-footer a { color: #2d5a27; }
+    </style>
+</head>
+<body>
+    <img class="webring-logo" src="assets/webring.png" alt="webringue">
+    <p class="webring-tagline">um webring de blogs pessoais de amigos queridos que vão sair na porrada eventualmente</p>
+    <div class="amigos-row">
+        <div class="amigo">
+            <a class="amigo-link" href="https://bibianca.neocities.org" target="_blank" rel="noopener">
+                <img class="avatar" src="assets/amigos/bia.png" alt="bia">
+                <span class="amigo-name">bia</span>
+            </a>
+            <div class="amigo-preview"><img class="print" src="assets/amigos/sitebia.png" alt="print do site da bia" loading="lazy"></div>
+        </div>
+        <div class="amigo">
+            <a class="amigo-link" href="https://carol.is" target="_blank" rel="noopener">
+                <img class="avatar" src="assets/amigos/carolinha.png" alt="carolinha">
+                <span class="amigo-name">carol</span>
+            </a>
+            <div class="amigo-preview"><img class="print" src="assets/amigos/sitecarol.png" alt="print do site da carolinha" loading="lazy"></div>
+        </div>
+        <div class="amigo">
+            <a class="amigo-link" href="https://doce.sh" target="_blank" rel="noopener">
+                <img class="avatar" src="assets/amigos/docinho.png" alt="docinho">
+                <span class="amigo-name">doce</span>
+            </a>
+            <div class="amigo-preview"><img class="print" src="assets/amigos/sitedoce.png" alt="print do site do docinho" loading="lazy"></div>
+        </div>
+        <div class="amigo">
+            <a class="amigo-link" href="https://outrolucas.neocities.org" target="_blank" rel="noopener">
+                <img class="avatar" src="assets/amigos/luquinha.png" alt="luquinha">
+                <span class="amigo-name">lucas</span>
+            </a>
+            <div class="amigo-preview"><img class="print" src="assets/amigos/sitelu.png" alt="print do site do luquinha" loading="lazy"></div>
+        </div>
+    </div>
+    <p class="webring-footer">avatares feitos no <a href="https://www.avatarsinpixels.com" target="_blank">avatarsinpixels</a></p>
+</body>
+</html>
