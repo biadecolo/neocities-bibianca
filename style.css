@@ -312,29 +312,69 @@ mark a{
     text-decoration: underline;
 }
 
-.brsnoneocities-label {
-    margin: 0 0 8px;
-    font-size: 0.72rem;
-    line-height: 1.4;
-    color: #555;
+.webringue-box {
+    padding: 10px 16px;
 }
 
-.brsnoneocities-random {
-    display: inline-block;
+.webringue-logo {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    transition: transform 0.15s ease;
+}
+
+.webringue-box a:hover .webringue-logo {
+    transform: scale(1.04);
+}
+
+.webringue-tooltip-wrap {
+    position: relative;
+    display: block;
+}
+
+.webringue-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    width: 190px;
+    background: #1a3a16;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1.4;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    text-align: center;
+    z-index: 5;
+}
+
+.webringue-tooltip-wrap:hover .webringue-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.webringue-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.webringue-nav-link {
     font-size: 0.72rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
     color: var(--bg-green);
-    background: var(--accent-green);
-    padding: 5px 14px;
-    border-radius: 999px;
     text-decoration: none;
-    transition: opacity 0.15s ease;
 }
 
-.brsnoneocities-random:hover {
-    opacity: 0.8;
+.webringue-nav-link:hover {
+    text-decoration: underline;
 }
 
 .exemplo img {
