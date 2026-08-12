@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+    <title>changelog – webcantinho da bia</title>
+    <link>https://bibianca.neocities.org/index.html</link>
+    <atom:link href="https://bibianca.neocities.org/feed-changelog.xml" rel="self" type="application/rss+xml" />
+    <description>avisos de mudanças e novidades no site</description>
+    <language>pt-br</language>
+
+    <item>
+        <title>shrine do wake up dead man no ar (ainda em andamento)</title>
+        <link>https://bibianca.neocities.org/wake-up-dead-man.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-08-12-20</guid>
+        <description>shrine do wake up dead man no ar (ainda em andamento)</description>
+        <pubDate>Wed, 12 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>separei o feed rss em três: tudo, blog + todo domingo e changelog, com botão de copiar o link</title>
+        <link>https://bibianca.neocities.org/assine.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-08-12-21</guid>
+        <description>separei o feed rss em três: tudo, blog + todo domingo e changelog, com botão de copiar o link</description>
+        <pubDate>Tue, 11 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>troquei os ícones do menu</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-08-12-22</guid>
+        <description>troquei os ícones do menu</description>
+        <pubDate>Mon, 10 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>adicionei navegação por setas do teclado na galeria de fotos</title>
+        <link>https://bibianca.neocities.org/galeria.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-08-12-23</guid>
+        <description>adicionei navegação por setas do teclado na galeria de fotos</description>
+        <pubDate>Sun, 09 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>página nova de erro 404 e página meus-pets</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-08-06-1</guid>
+        <description>página nova de erro 404 e página meus-pets</description>
+        <pubDate>Thu, 06 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>página de erro 404 atualizada</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-08-03-2</guid>
+        <description>página de erro 404 atualizada</description>
+        <pubDate>Mon, 03 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>página nova: meus-pets</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-08-03-3</guid>
+        <description>página nova: meus-pets</description>
+        <pubDate>Mon, 03 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>postei um novo post no blog: sempre erro a dose</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-08-02-4</guid>
+        <description>postei um novo post no blog: sempre erro a dose</description>
+        <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>postei um novo post no blog: recap julho</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-08-02-5</guid>
+        <description>postei um novo post no blog: recap julho</description>
+        <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>atualização semanal</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-26-6</guid>
+        <description>atualização semanal</description>
+        <pubDate>Sun, 26 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>shrine do tiaozinho online!!</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-22-7</guid>
+        <description>shrine do tiaozinho online!!</description>
+        <pubDate>Wed, 22 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>adicionei um feed rss :)</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-17-8</guid>
+        <description>adicionei um feed rss :)</description>
+        <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>postei meu primeiro post no blog</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-17-9</guid>
+        <description>postei meu primeiro post no blog</description>
+        <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>dei uma mexida no about</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-14-10</guid>
+        <description>dei uma mexida no about</description>
+        <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>adicionei 'nós' da tamara klink na /leitura (tô lendo agora)</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-14-11</guid>
+        <description>adicionei 'nós' da tamara klink na /leitura (tô lendo agora)</description>
+        <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>atualização semanal</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-12-12</guid>
+        <description>atualização semanal</description>
+        <pubDate>Sun, 12 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>adicionei um widget de chat do CozyTalk na nova coluna lateral direita</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-11-13</guid>
+        <description>adicionei um widget de chat do CozyTalk na nova coluna lateral direita</description>
+        <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>adicionei uma coluna lateral direita em todas as páginas (mais coisa vindo aí) e aumentei um pouco a largura da janela principal</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-11-14</guid>
+        <description>adicionei uma coluna lateral direita em todas as páginas (mais coisa vindo aí) e aumentei um pouco a largura da janela principal</description>
+        <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>a aba do navegador agora mostra 'bibi's web corner' quando o site tá em inglês</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-11-15</guid>
+        <description>a aba do navegador agora mostra 'bibi's web corner' quando o site tá em inglês</description>
+        <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>adicionei 'the moustache' do emmanuel carrère na /leitura (tô lendo agora)</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-11-16</guid>
+        <description>adicionei 'the moustache' do emmanuel carrère na /leitura (tô lendo agora)</description>
+        <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>arrumei o caminho dos banners do rodapé e troquei alguns por novos</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-11-17</guid>
+        <description>arrumei o caminho dos banners do rodapé e troquei alguns por novos</description>
+        <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>movi a caixinha de changelog pra coluna lateral direita, assim ela aparece em todas as páginas</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-11-18</guid>
+        <description>movi a caixinha de changelog pra coluna lateral direita, assim ela aparece em todas as páginas</description>
+        <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+        <title>atualização semanal</title>
+        <link>https://bibianca.neocities.org/index.html</link>
+        <guid isPermaLink="false">https://bibianca.neocities.org/index.html#changelog-2026-07-05-19</guid>
+        <description>atualização semanal</description>
+        <pubDate>Sun, 05 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+</channel>
+</rss>

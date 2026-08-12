@@ -91,6 +91,7 @@ html {
 
 .main-window {
     position: relative;
+    z-index: 2;
     background: #f8f9f5;
     width: 95%;
     max-width: var(--window-width);
@@ -101,6 +102,34 @@ html {
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     margin-top: 50px;
+}
+
+#noise-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.22;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 20 -8'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-repeat: repeat;
+    animation: noise-move 1s steps(8) infinite;
+}
+
+@keyframes noise-move {
+    0% { background-position: 0 0; }
+    10% { background-position: -20px -40px; }
+    20% { background-position: -60px 20px; }
+    30% { background-position: 40px -60px; }
+    40% { background-position: -40px 60px; }
+    50% { background-position: -60px -20px; }
+    60% { background-position: 60px 40px; }
+    70% { background-position: 20px -80px; }
+    80% { background-position: -20px 80px; }
+    90% { background-position: 40px 20px; }
+    100% { background-position: 0 0; }
 }
 .maxwid{
   max-width: 100%;
@@ -207,9 +236,64 @@ mark a{
 .menu-item-disabled:hover { background: var(--menu-bg); }
 
 .menu-icon {
-    width: 18px;
+    width: 21px;
     margin-right: 12px;
     image-rendering: pixelated;
+}
+
+.menu-dropdown {
+    position: relative;
+    background: transparent;
+}
+
+.menu-dropdown-summary {
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    font: inherit;
+    text-align: left;
+}
+
+.menu-dropdown-summary::after {
+    content: '+';
+    margin-left: auto;
+    color: #4a4a4a;
+    font-size: 1.05em;
+}
+
+.menu-dropdown:hover .menu-dropdown-summary::after,
+.menu-dropdown:focus-within .menu-dropdown-summary::after {
+    content: '−';
+}
+
+.menu-submenu {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 180px;
+    z-index: 20;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 8px;
+    padding: 8px;
+    background: var(--menu-bg);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-6px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+}
+
+.menu-dropdown:hover .menu-submenu,
+.menu-dropdown:focus-within .menu-submenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+    transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
 .lastfm-widget {
@@ -237,6 +321,19 @@ mark a{
 .lastfm-widget #song {
     font-size: 12px;
     line-height: 1.2;
+}
+.lastfm-live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2d5a27;
+    margin-right: 5px;
+    animation: lastfm-pulse 1.5s ease-in-out infinite;
+}
+@keyframes lastfm-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
 }
 
 .webring-box {
@@ -1226,6 +1323,10 @@ html.home::-webkit-scrollbar-button,
             font-weight: 600;
         }
 
+        .status-list li a {
+            color: #2d5a27;
+        }
+
         .changelog-list {
             list-style: none;
             padding: 0;
@@ -1401,6 +1502,47 @@ html.home::-webkit-scrollbar-button,
             font-style: italic;
         }
 
+        .month-accordion {
+            margin-bottom: 24px;
+        }
+
+        .month-accordion:last-child {
+            margin-bottom: 0;
+        }
+
+        .month-accordion summary {
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #1a3a16;
+            list-style: none;
+            padding: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--accent-green);
+            transition: color 0.2s;
+        }
+
+        .month-accordion summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .month-accordion summary::after {
+            content: '+';
+            font-size: 1.1em;
+            color: #4a6741;
+        }
+
+        .month-accordion[open] summary::after {
+            content: '−';
+        }
+
+        .month-accordion summary:hover {
+            color: #2d5a27;
+        }
+
         .gallery-grid {
             columns: 3;
             column-gap: 16px;
@@ -1523,6 +1665,28 @@ html.home::-webkit-scrollbar-button,
             color: #000;
             font-style: normal;
             text-align: left;
+        }
+
+        .modal-keyhint {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .modal-keyhint .key-cap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #fff #404040 #404040 #fff;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #000;
         }
 
         .close-modal {

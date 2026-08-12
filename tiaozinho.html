@@ -16,7 +16,10 @@
     <style data-page-specific>
       .back-link { display: inline-block; font-size: 0.8rem; color: #2d5a27; text-decoration: none; font-style: italic; margin-bottom: 16px; }
       .back-link:hover { color: #1a3a16; }
+      .back-link-top { display: block; width: fit-content; margin: 0 auto 20px auto; background-color: #2d5a27; color: #fff; padding: 6px 18px; border-radius: 20px; font-size: 0.8rem; font-style: normal; font-weight: 600; text-decoration: none; }
+      .back-link-top:hover { background-color: #1a3a16; }
       .shrine-title { font-size: 1.4rem; font-weight: 600; color: #1a1a1a; margin: 0 0 20px 0; }
+      .shrine-banner { width: 100%; height: 220px; object-fit: cover; object-position: center 30%; border-radius: 12px; margin-bottom: 20px; display: block; }
     </style>
 </head>
 <body>
@@ -25,6 +28,8 @@
             <aside class="sidebar"></aside>
             <section class="content-area">
                 <div class="content-box">
+                    <a class="back-link-top" href="shrines.html" data-i18n-en="← back to shrines">← voltar pra shrines</a>
+                    <img class="shrine-banner" src="assets/tiaozinho/tiaoo%20(4).png" alt="tiaozinho">
                     <h1 class="shrine-title">tiãozinho</h1>
 
                     <p data-i18n-en="tiãozinho became my friend when i started high school. he threw up on my lap the first time he rode in a car with me and got my whole school uniform dirty. he was shaking so much, with his eyes bugging out. that scared, timid little face. i loved that little face so much!!!!">o tiãozinho se tornou meu amigo quando eu entrei no ensino médio. ele vomitou no meu colo da primeira vez que andou de carro comigo e sujou meu uniforme da escola todinho. ele tremia muito, tinha o olhão esbugalhado. essa cara de assustado, de medroso. eu amava tanto essa carinha!!!!</p>
@@ -35,7 +40,7 @@
                         <div class="gallery-item"><img src="assets/tiaozinho/tiaoo%20(1).jpg" alt="tiaozinho"><span class="gallery-label" data-i18n-en="tião sleeping with one eye half-open">tiao dormindo com o olho meio aberto</span></div>
                         <div class="gallery-item"><img src="assets/tiaozinho/tiaoo%20(1).webp" alt="tiaozinho"><span class="gallery-label" data-i18n-en="cuddled up together on the floor at my mom's house">juntinhos no chão da casa da minha mãe</span></div>
                         <div class="gallery-item"><img src="assets/tiaozinho/tiaoo%20(1).jpeg" alt="tiaozinho"><span class="gallery-label" data-i18n-en="what a cuddlebug">que dengo</span></div>
-                        <div class="gallery-item"><img src="assets/tiaozinho/tiaoo%20(2).jpg" alt="tiaozinho"><span class="gallery-label" data-i18n-en="look at this little shit's face lolol">olha a cara desse fdp kkkkkkkkkkkkk</span></div>
+                        <div class="gallery-item"><img src="assets/tiaozinho/tiaoo%20(2).jpg" alt="tiaozinho"><span class="gallery-label" data-i18n-en="look at this little baby's sweet face">olha a cara desse fdp kkkkkkkkkkkkk</span></div>
                         <div class="gallery-item"><img src="assets/tiaozinho/tiaoo%20(2).webp" alt="tiaozinho"><span class="gallery-label" data-i18n-en="i tried to take a funny photo of him holding a pastel, but he wasn't really feeling that pillow">tentei tirar uma foto engraçada dele segurando um pastel, mas ele não ligava muito pra essa almofada</span></div>
                         <div class="gallery-item"><img src="assets/tiaozinho/tiaoo%20(3).webp" alt="tiaozinho"><span class="gallery-label" data-i18n-en="i loved bundling him up in blankets when it was cold. he slept so peacefully">adorava embolar ele em várias cobertinhas no frio. ele dormia bem sossegado</span></div>
                         <div class="gallery-item"><img src="assets/tiaozinho/tiaoo%20(1).png" alt="tiaozinho"><span class="gallery-label" data-i18n-en="i loved close-ups of my little friend's nose">adorava close-ups do nariz do meu amiguinho</span></div>
@@ -129,6 +134,7 @@
             <div class="retro-window-body">
                 <img class="modal-content" id="modal-img">
                 <div id="modal-caption"></div>
+                <div class="modal-keyhint"><span class="key-cap">←</span><span class="key-cap">→</span></div>
             </div>
         </div>
     </div>

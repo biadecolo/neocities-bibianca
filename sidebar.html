@@ -18,32 +18,42 @@
 
 <nav class="menu" id="site-menu">
     <a href="/index.html" class="menu-item" data-page="inicio">
-        <img src="/assets/menu-icons/comeco.png" class="menu-icon" alt=""> <span data-i18n-en="home">começo</span>
+        <img src="/assets/menu-icons/icon-comeco.svg" class="menu-icon" alt=""> <span data-i18n-en="home">começo</span>
     </a>
     <a href="/about.html" class="menu-item" data-page="about">
-        <img src="/assets/menu-icons/about.png" class="menu-icon" alt=""> <span data-i18n-en="who even are you">mona quem eh vc</span>
-    </a>
-    <a href="/leitura.html" class="menu-item" data-page="leitura">
-        <img src="/assets/menu-icons/leitura.png" class="menu-icon" alt=""> <span data-i18n-en="reading">leitura</span>
-    </a>
-    <a href="/shrines.html" class="menu-item" data-page="shrines">
-        <img src="/assets/menu-icons/shrines.png" class="menu-icon" alt=""> <span data-i18n-en="shrines">shrines</span>
-    </a>
-    <a href="/daily.html" class="menu-item" data-page="daily">
-        <img src="/assets/menu-icons/tododomingo.png" class="menu-icon" alt=""> <span data-i18n-en="every sunday">todo domingo</span>
-    </a>
-    <a href="/galeria.html" class="menu-item" data-page="galeria">
-        <img src="/assets/menu-icons/galeria.png" class="menu-icon" alt=""> <span data-i18n-en="gallery">galeria</span>
-    </a>
-    <a href="/creditos.html" class="menu-item" data-page="creditos">
-        <img src="/assets/menu-icons/colofao.png" class="menu-icon" alt=""> <span data-i18n-en="colophon">colofão</span>
+        <img src="/assets/menu-icons/icon-quemehvc.svg" class="menu-icon" alt=""> <span data-i18n-en="who even are you">mona quem eh vc</span>
     </a>
     <a href="/blog.html" class="menu-item" data-page="blog">
-        <img src="/assets/menu-icons/blog.png" class="menu-icon" alt=""> <span data-i18n-en="blog">blog</span>
+        <img src="/assets/menu-icons/icon-blog.svg" class="menu-icon" alt=""> <span data-i18n-en="blog">blog</span>
+    </a>
+    <div class="menu-dropdown" id="interesses-dropdown">
+        <button type="button" class="menu-item menu-dropdown-summary" id="interesses-toggle" aria-controls="interesses-submenu">
+            <img src="/assets/menu-icons/icon-interesses.svg" class="menu-icon" alt=""> <span data-i18n-en="thingsssss">coisinhas</span>
+        </button>
+        <div class="menu-submenu" id="interesses-submenu">
+            <a href="/leitura.html" class="menu-item menu-subitem" data-page="leitura">
+                <img src="/assets/menu-icons/icon-leitura.svg" class="menu-icon" alt=""> <span data-i18n-en="reading">leitura</span>
+            </a>
+            <a href="/galeria.html" class="menu-item menu-subitem" data-page="galeria">
+                <img src="/assets/menu-icons/icon-galeria.svg" class="menu-icon" alt=""> <span data-i18n-en="gallery">galeria</span>
+            </a>
+            <a href="/shrines.html" class="menu-item menu-subitem" data-page="shrines">
+                <img src="/assets/menu-icons/icon-shrines.svg" class="menu-icon" alt=""> <span data-i18n-en="shrines">shrines</span>
+            </a>
+            <a href="/pets.html" class="menu-item menu-subitem" data-page="pets">
+                <img src="/assets/menu-icons/icon-pets.svg" class="menu-icon" alt=""> <span data-i18n-en="my pets">meus pets</span>
+            </a>
+        </div>
+    </div>
+    <a href="/daily.html" class="menu-item" data-page="daily">
+        <img src="/assets/menu-icons/icon-tododomingo.svg" class="menu-icon" alt=""> <span data-i18n-en="every sunday">todo domingo</span>
+    </a>
+    <a href="/creditos.html" class="menu-item" data-page="creditos">
+        <img src="/assets/menu-icons/icon-colofao.svg" class="menu-icon" alt=""> <span data-i18n-en="colophon">colofão</span>
     </a>
 </nav>
 
-<a class="blog-rss-row" href="/feed.xml">
+<a class="blog-rss-row" href="/assine.html">
     <img src="https://cdn-icons-png.flaticon.com/512/3128/3128318.png" alt="RSS" class="blog-rss-icon">
     <span data-i18n-en="want to keep up with what I'm doing? my rss feed is here">quer acompanhar o que eu faço? meu feed rss tá aqui</span>
 </a>

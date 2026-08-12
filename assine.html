@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-en="bibi's web corner">assine – webcantinho da bia</title>
+    <link rel="stylesheet" href="style.css?v=20260717">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/porquinho.png">
+    <link rel="alternate" type="application/rss+xml" title="tudo – webcantinho da bia" href="feed-tudo.xml">
+    <link rel="alternate" type="application/rss+xml" title="blog + todo domingo – webcantinho da bia" href="feed-conteudo.xml">
+    <link rel="alternate" type="application/rss+xml" title="changelog – webcantinho da bia" href="feed-changelog.xml">
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://a.doce.sh/js/pa-MqS-ZH1OYWx0aYhiF3Hmj.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <style data-page-specific>
+        .subscribe-option { margin: 18px 0; }
+        .subscribe-option h3 { font-size: 1.05rem; margin: 0 0 6px; color: #2d5a27; }
+        .subscribe-option p { margin: 0 0 6px; }
+        .subscribe-freq { font-size: 0.85rem; color: #666; margin: 0 0 6px; }
+        .subscribe-option .copy-code-wrap { margin-top: 14px; }
+
+        .rss-link-row { display: flex; align-items: stretch; gap: 8px; }
+        .rss-feed-link {
+            flex-grow: 1;
+            display: block;
+            font-size: 0.7rem;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #dde8d8;
+            font-family: var(--font-main);
+            color: #555;
+            background: #fff;
+            text-decoration: none;
+            word-break: break-all;
+            line-height: 1.5;
+            transition: background 0.15s ease, border-color 0.15s ease;
+        }
+        .rss-feed-link:hover { background: #f8faf7; border-color: var(--accent-green); }
+        .rss-copy-btn {
+            flex-shrink: 0;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #dde8d8;
+            font-family: var(--font-main);
+            color: #2d5a27;
+            background: #fff;
+            cursor: pointer;
+            transition: background 0.15s ease, border-color 0.15s ease;
+        }
+        .rss-copy-btn:hover { background: #f8faf7; border-color: var(--accent-green); }
+    </style>
+</head>
+<body>
+    <div class="background-overlay">
+        <div class="main-window">
+            <aside class="sidebar"></aside>
+            <section class="content-area">
+                <div class="content-box">
+                    <h2 class="section-title" data-i18n-en="rss feeds">feeds rss</h2>
+                    <p data-i18n-en="i kept the RSS feeds separate for people who want to know more often what's going on around here, and for people who don't want to know quiiiite that much.">deixei os feeds RSS separados pra quem quer saber com mais frequência o que rola por aqui e quem não quer saber taaaanto assim.</p>
+
+                    <div class="subscribe-option">
+                        <h3 data-i18n-en="everything">tudo</h3>
+                        <p data-i18n-en="subscribing to this one, you'll see absolutely everything I do on the site: small updates, new posts, new pages, basically everything.">assinando esse aqui você vai ver absolutamente tudo que eu fizer no site: pequenos updates, novos posts, novas páginas, enfim, tudo mesmo.</p>
+                        <div class="copy-code-wrap">
+                            <div class="rss-link-row">
+                                <a class="rss-feed-link" href="feed-tudo.xml" target="_blank" rel="noopener">https://bibianca.neocities.org/feed-tudo.xml</a>
+                                <button type="button" class="rss-copy-btn" data-copy="https://bibianca.neocities.org/feed-tudo.xml" data-i18n-en="📋 copy">📋 copiar</button>
+                            </div>
+                            <span class="copy-tooltip" data-i18n-en="copied!">copiado!</span>
+                        </div>
+                    </div>
+
+                    <div class="subscribe-option">
+                        <h3 data-i18n-en="blog + every sunday">blog e atualizações semanais</h3>
+                        <p data-i18n-en="subscribing to this one, you'll only get notified about new blog posts and the weekly updates">assinando esse aqui você vai receber notificações só de novos posts do blog e das atualizações semanais</p>
+                        <div class="copy-code-wrap">
+                            <div class="rss-link-row">
+                                <a class="rss-feed-link" href="feed-conteudo.xml" target="_blank" rel="noopener">https://bibianca.neocities.org/feed-conteudo.xml</a>
+                                <button type="button" class="rss-copy-btn" data-copy="https://bibianca.neocities.org/feed-conteudo.xml" data-i18n-en="📋 copy">📋 copiar</button>
+                            </div>
+                            <span class="copy-tooltip" data-i18n-en="copied!">copiado!</span>
+                        </div>
+                    </div>
+
+                    <div class="subscribe-option">
+                        <h3 data-i18n-en="changelog">changelog</h3>
+                        <p data-i18n-en="subscribing to this one, you'll get changelog updates">assinando esse aqui você vai receber atualizações de changelog</p>
+                        <div class="copy-code-wrap">
+                            <div class="rss-link-row">
+                                <a class="rss-feed-link" href="feed-changelog.xml" target="_blank" rel="noopener">https://bibianca.neocities.org/feed-changelog.xml</a>
+                                <button type="button" class="rss-copy-btn" data-copy="https://bibianca.neocities.org/feed-changelog.xml" data-i18n-en="📋 copy">📋 copiar</button>
+                            </div>
+                            <span class="copy-tooltip" data-i18n-en="copied!">copiado!</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <aside class="sidebar-right"></aside>
+        </div>
+        <div id="footer-placeholder"></div>
+        <small class="mobile-notice"><span data-i18n-en="this site looks kinda rough on mobile. sorry! 🌻">esse site fica meio paia no mobile. me desculpa! 🌻</span></small>
+    </div>
+    <script src="script.js?v=20260717"></script>
+</body>
+</html>

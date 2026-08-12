@@ -76,31 +76,6 @@
             100% { background-position: 0 0; }
         }
 
-        #layer-menu {
-            position: fixed;
-            top: 16px;
-            left: 16px;
-            z-index: 10;
-            display: flex;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 8px;
-            border-radius: 8px;
-        }
-
-        #layer-menu button {
-            cursor: pointer;
-        }
-
-        #layer-menu button.active {
-            font-weight: bold;
-            background: #cdeccd;
-        }
-
-        .layer-hidden {
-            display: none !important;
-        }
-
         #topo-img {
             display: block;
             width: 800px;
@@ -138,24 +113,7 @@
     <div id="col-meio"></div>
     <div id="col-baixo"></div>
 
-    <div id="layer-menu">
-        <button type="button" class="active" data-layer="particles">bolhas</button>
-        <button type="button" class="active" data-layer="rain">chuva</button>
-        <button type="button" class="active" data-layer="grain">grão</button>
-        <button type="button" class="active" data-layer="particles-js">particles.js</button>
-    </div>
-
     <script>
-        // toggles das camadas de efeito
-        const layerButtons = document.querySelectorAll('#layer-menu button');
-        layerButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const layer = document.getElementById(button.dataset.layer);
-                layer.classList.toggle('layer-hidden');
-                button.classList.toggle('active');
-            });
-        });
-
         // partículas flutuando com blur leve
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');

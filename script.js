@@ -45,8 +45,12 @@ function updateActiveMenuItem() {
     const page = filename === '' || filename === 'index' ? 'inicio' : filename;
     aside.querySelectorAll('.menu-item.active').forEach(el => el.classList.remove('active'));
     const active = aside.querySelector(`[data-page="${page}"]`);
-    if (active) active.classList.add('active');
+    if (active) {
+        active.classList.add('active');
+    }
 }
+
+let nowPlayingInterval = null;
 
 async function loadSidebarRight() {
     const aside = document.querySelector('aside.sidebar-right');
@@ -59,22 +63,39 @@ async function loadSidebarRight() {
 
         if (typeof applyLang === 'function') applyLang(getLang());
 
-        let user = 'biadecolo';
-        let url = 'https://lastfm-last-played.biancarosa.com.br/' + user + '/latest-song';
-        let song = aside.querySelector('#song');
+        if (nowPlayingInterval) {
+            clearInterval(nowPlayingInterval);
+            nowPlayingInterval = null;
+        }
+
+        const song = aside.querySelector('#song');
         if (song) {
-            fetch(url)
-                .then(response => response.json())
-                .then(json => {
-                    if (!json || !json.track || !json.track.name) {
+            const user = 'biadecolo';
+            const url = 'https://lastfm-last-played.biancarosa.com.br/' + user + '/latest-song';
+            const updateNowPlaying = () => {
+                fetch(url)
+                    .then(response => response.json())
+                    .then(json => {
+                        if (!json || !json.track || !json.track.name) {
+                            song.textContent = '...';
+                            return;
+                        }
+                        const isNowPlaying = !!(json.track['@attr'] && json.track['@attr'].nowplaying === 'true');
+                        song.innerHTML = '';
+                        if (isNowPlaying) {
+                            const dot = document.createElement('span');
+                            dot.className = 'lastfm-live-dot';
+                            dot.title = 'tocando agora';
+                            song.appendChild(dot);
+                        }
+                        song.appendChild(document.createTextNode(json.track.name + ' - ' + json.track.artist['#text']));
+                    })
+                    .catch(() => {
                         song.textContent = '...';
-                        return;
-                    }
-                    song.textContent = json.track.name + ' - ' + json.track.artist['#text'];
-                })
-                .catch(() => {
-                    song.textContent = '...';
-                });
+                    });
+            };
+            updateNowPlaying();
+            nowPlayingInterval = setInterval(updateNowPlaying, 15000);
         }
     } catch (err) {
         console.error('erro ao carregar sidebar-right:', err);
@@ -128,8 +149,20 @@ function initShrineCarousels() {
 
         carousel.querySelector(".carousel-prev").addEventListener("click", () => goTo(index - 1));
         carousel.querySelector(".carousel-next").addEventListener("click", () => goTo(index + 1));
+
+        carousel._prev = () => goTo(index - 1);
+        carousel._next = () => goTo(index + 1);
     });
 }
+
+document.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    if (e.target.closest("input, textarea, [contenteditable]")) return;
+    document.querySelectorAll(".shrine-carousel").forEach(carousel => {
+        if (e.key === "ArrowLeft") carousel._prev?.();
+        else carousel._next?.();
+    });
+});
 
 function initGalleryShuffle() {
     const galleryGrid = document.querySelector(".gallery-grid");
@@ -143,29 +176,51 @@ function initGalleryShuffle() {
     }
 }
 
+let lightboxImages = [];
+let lightboxIndex = -1;
+
+function showLightboxImage() {
+    const modal = document.getElementById("image-modal");
+    const modalImg = document.getElementById("modal-img");
+    const captionText = document.getElementById("modal-caption");
+    const img = lightboxImages[lightboxIndex];
+    if (!modal || !modalImg || !img) return;
+    modal.style.display = "flex";
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+    const label = img.nextElementSibling;
+    captionText.innerHTML = label ? label.innerHTML : img.alt;
+}
+
 function initGalleryLightbox() {
     const modal = document.getElementById("image-modal");
     if (modal) {
-        const modalImg = document.getElementById("modal-img");
-        const captionText = document.getElementById("modal-caption");
-
         document.querySelectorAll(".gallery-item img").forEach(img => {
             img.addEventListener("click", function() {
-                modal.style.display = "flex";
-                modalImg.src = this.src;
-                modalImg.alt = this.alt;
-                const label = this.nextElementSibling;
-                captionText.innerHTML = label ? label.innerHTML : this.alt;
+                const grid = this.closest(".gallery-grid");
+                lightboxImages = grid ? Array.from(grid.querySelectorAll(".gallery-item img")) : [this];
+                lightboxIndex = lightboxImages.indexOf(this);
+                showLightboxImage();
             });
         });
     }
 }
 
+document.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    if (e.target.closest("input, textarea, [contenteditable]")) return;
+    const modal = document.getElementById("image-modal");
+    if (!modal || modal.style.display !== "flex" || lightboxImages.length === 0) return;
+    lightboxIndex = (lightboxIndex + (e.key === "ArrowRight" ? 1 : -1) + lightboxImages.length) % lightboxImages.length;
+    showLightboxImage();
+});
+
 function initCopyCode() {
-    document.querySelectorAll('.copy-code').forEach(btn => {
+    document.querySelectorAll('.copy-code, .rss-copy-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            navigator.clipboard.writeText(btn.textContent.trim()).then(() => {
-                const tooltip = btn.parentElement.querySelector('.copy-tooltip');
+            const text = btn.dataset.copy || btn.textContent.trim();
+            navigator.clipboard.writeText(text).then(() => {
+                const tooltip = btn.closest('.copy-code-wrap')?.querySelector('.copy-tooltip') || btn.parentElement.querySelector('.copy-tooltip');
                 if (!tooltip) return;
                 tooltip.classList.add('show');
                 clearTimeout(tooltip._hideTimer);
@@ -186,6 +241,8 @@ function initCursorEffects() {
                 colors: ["#097969", "#50C878", "#4F7942"],
                 fairySymbol: "★",
             });
+            const cursorCanvas = document.body.querySelector('canvas');
+            if (cursorCanvas) cursorCanvas.style.zIndex = '9999';
             resolve();
         };
         document.head.appendChild(s);
@@ -548,6 +605,53 @@ function initComments(container) {
     });
 }
 
+function initNoise() {
+    const noise = document.createElement('div');
+    noise.id = 'noise-bg';
+    document.body.insertBefore(noise, document.body.firstChild);
+}
+
+const PT_MONTHS = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+const EN_MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+
+function groupTimelineByMonth(container) {
+    const timeline = container.querySelector('.timeline');
+    if (!timeline) return;
+
+    const entries = Array.from(timeline.querySelectorAll(':scope > .timeline-entry'));
+    if (entries.length === 0) return;
+
+    let currentGroup = null;
+    let currentMonth = null;
+    let isFirst = true;
+
+    entries.forEach(entry => {
+        const month = entry.dataset.month;
+        if (month !== currentMonth) {
+            currentMonth = month;
+            const [year, m] = month.split('-');
+            const idx = parseInt(m, 10) - 1;
+
+            currentGroup = document.createElement('details');
+            currentGroup.className = 'month-accordion';
+            if (isFirst) {
+                currentGroup.open = true;
+                isFirst = false;
+            }
+
+            const summary = document.createElement('summary');
+            summary.textContent = `${PT_MONTHS[idx]} de ${year}`;
+            summary.setAttribute('data-i18n-en', `${EN_MONTHS[idx]} ${year}`);
+            currentGroup.appendChild(summary);
+
+            timeline.appendChild(currentGroup);
+        }
+        currentGroup.appendChild(entry);
+    });
+
+    if (typeof applyLang === 'function') applyLang(getLang());
+}
+
 function initContent(container) {
     if (typeof applyLang === 'function') applyLang(getLang());
     initShrineCarousels();
@@ -555,6 +659,7 @@ function initContent(container) {
     initGalleryLightbox();
     initCopyCode();
     initComments(container);
+    groupTimelineByMonth(container);
     executeInlineScripts(container);
 }
 
@@ -569,6 +674,7 @@ loadSidebar();
 loadSidebarRight();
 loadFooter();
 initCursorEffects();
+initNoise();
 initContent(document.querySelector('.content-area'));
 
 function isRoutableLink(a) {

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-en="bibi's web corner">meus pets – webcantinho da bia</title>
+    <link rel="stylesheet" href="style.css?v=20260717">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/porquinho.png">
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://a.doce.sh/js/pa-MqS-ZH1OYWx0aYhiF3Hmj.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <style data-page-specific>
+      .wip-notice { background-color: var(--accent-green); border-radius: 10px; padding: 10px 16px; font-size: 0.85rem; color: #1a3a16; margin-bottom: 20px; }
+      .pets-tabs { display: flex; gap: 10px; margin-bottom: 0; flex-wrap: wrap; position: relative; z-index: 1; }
+      .pets-tab { display: flex; flex: 1; flex-direction: column; align-items: center; gap: 4px; background: var(--menu-bg); border: none; border-radius: 12px; padding: 8px 14px; cursor: pointer; font-family: inherit; font-size: 0.8rem; color: #4a4a4a; transition: background 0.2s; }
+      .pets-tab:hover { background: #e2e8de; }
+      .pets-tab.active { background: var(--accent-green); color: #1a3a16; font-weight: 600; }
+      .pets-tab img { width: 140px; height: 140px; object-fit: contain; image-rendering: pixelated; }
+      .pets-tab-panel { background: var(--accent-green); border-radius: 12px; padding: 16px; margin-top: 16px; }
+      .tooltip-text { position: relative; text-decoration: underline dotted; text-underline-offset: 3px; cursor: help; }
+      .tooltip-text::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-4px);
+        background: #1a3a16;
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 500;
+        line-height: 1.4;
+        padding: 5px 10px;
+        border-radius: 10px;
+        white-space: normal;
+        width: max-content;
+        max-width: 220px;
+        text-align: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.08s ease;
+        z-index: 10;
+      }
+      .tooltip-text:hover::after { opacity: 1; }
+    </style>
+</head>
+<body>
+    <div class="background-overlay">
+        <div class="main-window">
+            <aside class="sidebar"></aside>
+
+            <section class="content-area">
+                <div class="content-box">
+                    <h2 data-i18n-en="my pets">meus pets</h2>
+
+                    <div class="pets-tabs" role="tablist">
+                        <button type="button" class="pets-tab active" data-tab="cafune" role="tab" aria-selected="true">
+                            <img src="assets/pets/cafune1.png" alt="cafuné">
+                            <span data-i18n-en="cafuné">cafuné</span>
+                        </button>
+                        <button type="button" class="pets-tab" data-tab="milhoverde" role="tab" aria-selected="false">
+                            <img src="assets/pets/milhoverde.png" alt="milho verde">
+                            <span data-i18n-en="milho verde">milho verde</span>
+                        </button>
+                        <button type="button" class="pets-tab" data-tab="seltonmelo" role="tab" aria-selected="false">
+                            <img src="assets/pets/seltonmelo.png" alt="selton melo">
+                            <span data-i18n-en="selton melo">selton melo</span>
+                        </button>
+                    </div>
+
+                    <div class="pets-tab-panel" data-panel="cafune">
+                        <p data-i18n-en="cafuné came to our house together with selton melo, when we &lt;span class=&quot;tooltip-text&quot; data-tooltip=&quot;selton melo and cafuné are siblings&quot;&gt;&lt;i&gt;adopted the kittens&lt;/i&gt;&lt;/span&gt;. she climbs into bed every day when it's time to wake up to get a bit of cuddles. she's a scaredy-cat, hides all the time, but she's super affectionate with us. she'll stay on your lap for ages if she picks you as her victim. she makes tons and tons and tons of biscuits (kneading).">a cafuné veio pra nossa casa junto com o selton melo, quando <span class="tooltip-text" data-tooltip="selton melo e cafuné são irmões"><i>adotamos os filhotes</i></span>. ela sobe todo dia na cama na hora de acordar pra ganhar um pouco de dengo. é uma gatinha medrosa, se esconde o tempo todo, mas é muito dengosa com a gente. fica um tempão no colo se ela escolher você como vítima. faz muitos e muitos e muitos pãozinhos.</p>
+                        <div class="gallery-grid"></div>
+                    </div>
+                    <div class="pets-tab-panel" data-panel="milhoverde" hidden>
+                        <p data-i18n-en="milho is our oldest kitty, besides being the first cat I ever had in my life. I'd always had dogs before. it was with her that I learned how kittens work. when she arrived, I wanted to squeeze her, turn her inside out, but I had to learn how she worked. these days I get belly rubs all the time!! she's a tricolor kitty, looks like a little tigress, so affectionate (but only when she wants to)! she looks a bit like her dad, who, when he wants affection, wants it a lot, but when he doesn't, you'd better leave him alone lolololol">a milho é nossa gatinha mais velha, além de ser a primeira gata que eu tive na vida. sempre tive cachorros antes. foi com ela que eu aprendi como gatinhos funcionam. quando ela chegou, queria apertar ela, virar ela do avesso, mas tive que aprender como ela funcionava. hoje em dia tenho direito a barriguinha toda hora!! ela é uma gatinha tricolor, parece uma tigresinha, dengosa que só (mas quando ela quer)! ela parece um pouco o pai dela que, quando quer carinho, quer muito, mas quando não quer deve deixar quietinho kkkkkkkk</p>
+                        <div class="gallery-grid"></div>
+                    </div>
+                    <div class="pets-tab-panel" data-panel="seltonmelo" hidden>
+                        <p data-i18n-en="the perfect name was &lt;a href=&quot;https://outrolucas.neocities.org&quot; target=&quot;_blank&quot;&gt;lucas&lt;/a&gt;'s idea. selton melo is the laziest cat of all, such a floppy cat. he lets us push him around however we want, just meowing in complaint the whole time he lets it happen. he's very affectionate and loves sleeping with us, but he doesn't like being near your face, he just stays between your legs.">o nome perfeito foi ideia do <a href="https://outrolucas.neocities.org" target="_blank">lucas</a>. o selton melo é o gato mais preguiçoso de todos, super gato mole. ele deixa a gente fazer de gato e sapato com ele, só fica miando reclamando enquanto deixa. é bem dengoso e adora dormir com a gente, mas ele não gosta de ficar perto do rosto, só fica entre as pernas.</p>
+                        <div class="gallery-grid"></div>
+                    </div>
+
+                    <div class="gallery-grid" id="pets-gallery-fixed">
+                        <div class="gallery-item"><img src="assets/pets/bebes%20(1).jpg" alt="gatinho bebê"><span class="gallery-label"></span></div>
+                        <div class="gallery-item"><img src="assets/pets/bebes%20(2).jpg" alt="gatinho bebê"><span class="gallery-label"></span></div>
+                        <div class="gallery-item"><img src="assets/pets/bebes%20(3).jpg" alt="gatinho bebê"><span class="gallery-label"></span></div>
+                        <div class="gallery-item"><img src="assets/pets/bebes%20(4).jpg" alt="gatinho bebê"><span class="gallery-label"></span></div>
+                        <div class="gallery-item"><img src="assets/pets/bebes%20(5).jpg" alt="gatinho bebê"><span class="gallery-label"></span></div>
+                        <div class="gallery-item"><img src="assets/pets/bebes%20(6).jpg" alt="gatinho bebê"><span class="gallery-label"></span></div>
+                        <div class="gallery-item"><img src="assets/pets/bebes%20(7).jpg" alt="gatinho bebê"><span class="gallery-label"></span></div>
+                        <div class="gallery-item"><img src="assets/pets/bebes%20(8).jpg" alt="gatinho bebê"><span class="gallery-label"></span></div>
+                        <div class="gallery-item"><img src="assets/pets/bebes%20(9).jpg" alt="gatinho bebê"><span class="gallery-label"></span></div>
+                        <div class="gallery-item"><img src="assets/pets/bebes%20(10).jpg" alt="gatinho bebê"><span class="gallery-label"></span></div>
+                        <div class="gallery-item"><img src="assets/pets/bebes%20(11).jpg" alt="gatinho bebê"><span class="gallery-label"></span></div>
+                        <div class="gallery-item"><img src="assets/pets/bebes%20(12).jpg" alt="gatinho bebê"><span class="gallery-label"></span></div>
+                    </div>
+
+                    <script>
+                        (function() {
+                            const tabs = document.querySelectorAll('.pets-tab');
+                            const panels = document.querySelectorAll('.pets-tab-panel');
+                            tabs.forEach(tab => {
+                                tab.addEventListener('click', () => {
+                                    tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+                                    panels.forEach(p => p.hidden = true);
+                                    tab.classList.add('active');
+                                    tab.setAttribute('aria-selected', 'true');
+                                    document.querySelector(`.pets-tab-panel[data-panel="${tab.dataset.tab}"]`).hidden = false;
+                                });
+                            });
+                        })();
+                    </script>
+                </div>
+            </section>
+            <aside class="sidebar-right"></aside>
+        </div>
+
+        <div id="footer-placeholder"></div>
+        <small class="mobile-notice"><span data-i18n-en="this site looks kinda rough on mobile. sorry! 🌻">esse site fica meio paia no mobile. me desculpa! 🌻</span></small>
+    </div>
+
+    <div id="image-modal" class="modal" onclick="this.style.display='none'">
+        <div class="retro-window" onclick="event.stopPropagation()">
+            <div class="retro-titlebar">
+                <span class="retro-title">🖼 image.jpg</span>
+                <span class="close-modal" onclick="document.getElementById('image-modal').style.display='none'">✕</span>
+            </div>
+            <div class="retro-window-body">
+                <img class="modal-content" id="modal-img">
+                <div id="modal-caption"></div>
+                <div class="modal-keyhint"><span class="key-cap">←</span><span class="key-cap">→</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=20260717"></script>
+</body>
+</html>

@@ -1,19 +1,52 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="pt-br">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Not Found</title>
-    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+    <title data-i18n-en="bibi's web corner">página não encontrada – webcantinho da bia</title>
+    <link rel="stylesheet" href="style.css?v=20260717">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/porquinho.png">
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://a.doce.sh/js/pa-MqS-ZH1OYWx0aYhiF3Hmj.js"></script>
     <script>
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
       plausible.init()
     </script>
-  </head>
-  <body>
-    <h1>Page Not Found</h1>
-    <p>The requested page was not found.</p>
-  </body>
+    <style data-page-specific>
+      .content-box { display: flex; flex-direction: column; justify-content: center; min-height: 100%; }
+      .notfound-wrap { text-align: center; padding: 50px 20px; }
+      .notfound-title { font-size: 1.3rem; font-weight: 600; margin: 12px 0 8px; color: #1a1a1a; }
+      .notfound-text { font-size: 0.9rem; color: #666; margin: 0 0 26px; }
+      .notfound-back { display: inline-block; background: var(--bg-green); color: #fff; padding: 10px 22px; border-radius: 20px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: background 0.2s; }
+      .notfound-back:hover { background: #1a3a16; }
+
+      .notfound-gnome { width: 340px; margin: 0 auto 10px; display: block; }
+      .notfound-wrap .notfound-credit { font-size: 0.75rem; color: #999; margin: 34px 0 0; }
+      .notfound-credit a { color: #999; text-decoration: underline; }
+      .notfound-credit a:hover { color: #666; }
+    </style>
+</head>
+<body>
+    <div class="background-overlay">
+        <div class="main-window">
+            <aside class="sidebar"></aside>
+            <section class="content-area">
+                <div class="content-box">
+                    <div class="notfound-wrap">
+                        <img src="assets/gnominholost.png" class="notfound-gnome" alt="">
+                        <h2 class="notfound-title" data-i18n-en="whoa, there's nothing at this address.">eita, não tem nada nesse endereço.</h2>
+                        <p class="notfound-text" data-i18n-en="the page you're looking for doesn't exist :(">a página que você tá procurando não existe :(</p>
+                        <a class="notfound-back" href="/index.html" data-i18n-en="← back home">← voltar pro início</a>
+                        <p class="notfound-credit" data-i18n-en="illustration by &lt;a href=&quot;https://www.instagram.com/gooodvibeswithanu/&quot; target=&quot;_blank&quot;&gt;@gooodvibeswithanu&lt;/a&gt; on instagram">ilustração por <a href="https://www.instagram.com/gooodvibeswithanu/" target="_blank">@gooodvibeswithanu</a> no instagram</p>
+                    </div>
+                </div>
+            </section>
+            <aside class="sidebar-right"></aside>
+        </div>
+        <div id="footer-placeholder"></div>
+        <small class="mobile-notice"><span data-i18n-en="this site looks kinda rough on mobile. sorry! 🌻">esse site fica meio paia no mobile. me desculpa! 🌻</span></small>
+    </div>
+    <script src="script.js?v=20260717"></script>
+</body>
 </html>
