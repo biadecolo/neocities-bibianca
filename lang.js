@@ -21,6 +21,13 @@ function applyLang(lang) {
         el.innerHTML = lang === 'en' ? el.getAttribute('data-i18n-en') : el.getAttribute('data-i18n-pt-cache');
     });
 
+    document.querySelectorAll('[data-i18n-en-src]').forEach(el => {
+        if (!el.hasAttribute('data-i18n-pt-src-cache')) {
+            el.setAttribute('data-i18n-pt-src-cache', el.getAttribute('src'));
+        }
+        el.setAttribute('src', lang === 'en' ? el.getAttribute('data-i18n-en-src') : el.getAttribute('data-i18n-pt-src-cache'));
+    });
+
     const btn = document.getElementById('lang-toggle');
     if (btn) {
         const br = '<img src="https://flagcdn.com/w20/br.png" alt="PT-BR" style="vertical-align: middle; border-radius: 2px;">';

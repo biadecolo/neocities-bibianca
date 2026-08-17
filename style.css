@@ -521,6 +521,7 @@ mark a{
 
 .content-area {
     flex-grow: 1;
+    min-width: 0;
     display: flex;
     gap: 15px;
     margin-left: 20px;
@@ -754,6 +755,12 @@ html.home::-webkit-scrollbar-button,
             display: block;
             width: 100%;
             border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .blog-post-image:hover {
+            transform: scale(1.01);
         }
 
         .blog-post-image-caption {
@@ -761,6 +768,47 @@ html.home::-webkit-scrollbar-button,
             margin-top: 4px;
             font-size: 0.68rem;
             color: #999;
+        }
+
+        .blog-post-image-row {
+            display: flex;
+            gap: 10px;
+            margin: 16px 0;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .blog-post-image-row img {
+            flex: 1 1 0;
+            min-width: 140px;
+            width: auto;
+            border-radius: 12px;
+            object-fit: cover;
+            max-height: 320px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .blog-post-image-row-item {
+            flex: 1 1 0;
+            min-width: 140px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .blog-post-image-row .blog-post-image-row-item img {
+            flex: none;
+            width: 100%;
+            min-width: 0;
+        }
+
+        .blog-post-image-row-item .blog-post-image-caption {
+            margin-top: 0;
+        }
+
+        .blog-post-image-row img:hover {
+            transform: scale(1.01);
         }
 
         .blog-entry {
@@ -1348,6 +1396,12 @@ html.home::-webkit-scrollbar-button,
             line-height: 1.4;
         }
 
+        .changelog-list li span:last-child {
+            align-self: stretch;
+            min-width: 0;
+            overflow-wrap: break-word;
+        }
+
         .changelog-date {
             flex-shrink: 0;
             font-size: 0.68rem;
@@ -1654,6 +1708,17 @@ html.home::-webkit-scrollbar-button,
             padding: 4px;
             border: 2px solid;
             border-color: #404040 #fff #fff #404040;
+            cursor: zoom-in;
+            transition: width 0.1s ease, height 0.1s ease;
+        }
+
+        .modal-content.zoomed {
+            cursor: grab;
+        }
+
+        .modal-content.dragging {
+            cursor: grabbing;
+            transition: none;
         }
 
         #modal-caption {
