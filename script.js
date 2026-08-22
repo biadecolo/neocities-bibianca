@@ -761,13 +761,6 @@ function initContent(container) {
     executeInlineScripts(container);
 }
 
-fetch('/head.html')
-    .then(response => response.text())
-    .then(data => {
-        document.head.insertAdjacentHTML('beforeend', data);
-    })
-    .catch(error => console.error('Erro ao carregar o head:', error));
-
 loadSidebar();
 loadSidebarRight();
 loadFooter();

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n-en="bibi's web corner">leitura – webcantinho da bia</title>
-    <link rel="stylesheet" href="style.css?v=20260717">
+    <link rel="stylesheet" href="style.css?v=20260822">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/porquinho.png">
     <!-- Privacy-friendly analytics by Plausible -->
@@ -13,6 +13,46 @@
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
       plausible.init()
     </script>
+    <style data-page-specific>
+      .book-list { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 8px; align-items: start; gap: 16px; }
+      .book-entry {
+        display: block;
+        margin-bottom: 0;
+        background: #f8f9f5;
+        border: 1px solid #eef1ea;
+        border-radius: 12px;
+        padding: 14px;
+        box-shadow: 2px 4px 10px rgba(0,0,0,0.06);
+        animation: book-fade-in 0.35s ease both;
+      }
+      .book-entry:first-child { padding-top: 14px; }
+      .book-entry:last-child { border-bottom: 1px solid #eef1ea; padding-bottom: 14px; }
+      .book-cover { display: block; width: 100%; height: auto; max-height: 260px; object-fit: cover; border-radius: 8px; box-shadow: none; }
+      .book-info { display: flex; flex-direction: column; margin-top: 10px; gap: 4px; }
+      .verdict-filter {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+        width: fit-content;
+        max-width: 100%;
+        margin: 14px auto 16px;
+        background: #eef1ea;
+        padding: 5px;
+        border-radius: 999px;
+      }
+      .verdict-btn { font-family: inherit; font-size: 0.75rem; background: transparent; color: #4a6741; border: none; padding: 5px 12px; border-radius: 20px; font-weight: 500; cursor: pointer; transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease; }
+      .verdict-btn:hover { background: #e2e8de; color: #1a3a16; transform: translateY(-1px); }
+      .verdict-btn.active { background: var(--accent-green); color: #1a3a16; }
+      @keyframes book-fade-in {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .book-entry { animation: none; }
+        .verdict-btn { transition: none; }
+      }
+    </style>
 </head>
 <body>
     <div class="background-overlay">
@@ -22,281 +62,160 @@
             <section class="content-area">
                 <div class="content-box">
                     <h2 data-i18n-en="reading">leitura</h2>
-                    <p data-i18n-en="⚠️ my &lt;mark&gt;&lt;a href=&quot;https://app.thestorygraph.com/profile/bibiareads&quot; target=&quot;_blank&quot;&gt;storygraph profile&lt;/a&gt;&lt;/mark&gt; is probably way more up to date than this page">⚠️ provavelmente o meu <a href="https://app.thestorygraph.com/profile/bibiareads" target="_blank"><mark>perfil no storygraph</mark></a> tá bem mais atualizado do que aqui</p>
-                    <div class="book-list">
- <article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/wffza7rcf1xxvzmkpyfbawnkbrp8"
-         alt="capa de nós">
-    <div class="book-info">
-        <span class="book-date">julho de 2026</span>
-        <h3 class="book-title">nós</h3>
-        <span class="book-author">tamara klink</span>
-        <p class="book-excerpt"></p>
-        <span class="book-link">lendo</span>
-    </div>
-</article>
+                    <p data-i18n-en="thanks to my friend &lt;mark&gt;&lt;a href=&quot;https://doce.sh&quot; target=&quot;_blank&quot;&gt;doce&lt;/a&gt;&lt;/mark&gt;, this page now just pulls the books straight from storygraph. thank you, friend, you're the best!!">graças ao meu amigo <mark><a href="https://doce.sh" target="_blank">doce</a></mark>, agora essa página simplesmente puxa os livros diretamente do storygraph. obrigada, amigo, você arrasa demais!!</p>
+                    <div class="verdict-filter" id="verdict-filter"></div>
+                    <div class="book-list" id="book-list"></div>
 
- <article class="book-entry">
-    <img class="book-cover"
-         src="https://m.media-amazon.com/images/I/71WBy5+a64L._AC_UF1000,1000_QL80_.jpg"
-         alt="capa de the moustache">
-    <div class="book-info">
-        <span class="book-date">julho de 2026</span>
-        <h3 class="book-title">the moustache</h3>
-        <span class="book-author">emmanuel carrère</span>
-        <p class="book-excerpt">a premissa do livro é ótima e o negócio vai desandando tanto no caminho que você se surpreende. o final me chocou um pouco mas foi muito bom</p>
-        <span class="book-link">gostei</span>
-    </div>
-</article>
+                    <script>
+                        (function() {
+                            var list = document.getElementById('book-list');
+                            var filterBar = document.getElementById('verdict-filter');
+                            if (!list || !filterBar) return;
 
- <article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/9dk2x4ppt2yr5hv7b8y0xy6a1pix"
-         alt="capa de corpo desfeito">
-    <div class="book-info">
-        <span class="book-date">junho de 2026</span>
-        <h3 class="book-title">corpo desfeito</h3>
-        <span class="book-author">jarid arraes</span>
-        <p class="book-excerpt">me deu depressão 2, que livro triste da porra. senti em alguns pontos que a personagem principal sofre tanto que o livro fica até maçante :(</p>
-        <span class="book-link">gostei mais ou menos</span>
-    </div>
-</article>
-  <article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/nusgwhhe64vlyk2g6rxtv8p7xvol"
-         alt="capa de a segunda vinda de hilda bustamante">
-    <div class="book-info">
-        <span class="book-date">junho de 2026</span>
-        <h3 class="book-title">a segunda vinda de hilda bustamante</h3>
-        <span class="book-author">salomé esper</span>
-        <p class="book-excerpt">divertidinho. beeem repetitivo, mas achei muito fofo</p>
-        <span class="book-link">gostei mais ou menos</span>
-    </div>
-</article>
+                            // arquivo dos livros com meus comentários e tags — preservado mesmo quando a API não trouxer o livro
+                            var ARCHIVE = [
+                                { cover: 'https://cdn.thestorygraph.com/aj63mzmah9b9dzh48w56585ffc8w', title: 'the metamorphosis', author: 'franz kafka', date: '', excerpt: 'comecei a ouvir esse na ida e terminei ele na volta da viagem. gostei muito, só não sei bem o que sentir com o final.', tag: 'gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/jztibk5xvnynw7mh7hfw0orhbzuh', title: 'animal farm', author: 'george orwell', date: '', excerpt: 'ouvi esse no caminho pra arraial do cabo e gostei um bocado. tô tentando ouvir os clássicos pra ver se me comprometo a saber como são, já que nem sempre engajo muito com a leitura deles. a narração desse livro no audible é muito boa!', tag: 'gostei' },
+                                { cover: 'https://cdn.thestorygraph.com/wffza7rcf1xxvzmkpyfbawnkbrp8', title: 'nós', author: 'tamara klink', date: 'julho de 2026', excerpt: '', tag: 'abandonado' },
+                                { cover: 'https://m.media-amazon.com/images/I/71WBy5+a64L._AC_UF1000,1000_QL80_.jpg', title: 'the moustache', author: 'emmanuel carrère', date: 'julho de 2026', excerpt: 'a premissa do livro é ótima e o negócio vai desandando tanto no caminho que você se surpreende. o final me chocou um pouco mas foi muito bom', tag: 'gostei' },
+                                { cover: 'https://cdn.thestorygraph.com/9dk2x4ppt2yr5hv7b8y0xy6a1pix', title: 'corpo desfeito', author: 'jarid arraes', date: 'junho de 2026', excerpt: 'me deu depressão 2, que livro triste da porra. senti em alguns pontos que a personagem principal sofre tanto que o livro fica até maçante :(', tag: 'gostei mais ou menos' },
+                                { cover: 'https://cdn.thestorygraph.com/nusgwhhe64vlyk2g6rxtv8p7xvol', title: 'a segunda vinda de hilda bustamante', author: 'salomé esper', date: 'junho de 2026', excerpt: 'divertidinho. beeem repetitivo, mas achei muito fofo', tag: 'gostei mais ou menos' },
+                                { cover: 'https://cdn.thestorygraph.com/73kszw0bzkilziqeqvg858vlez7b', title: 'bom dia, socorro', author: 'paulo moreira', date: 'junho de 2026', excerpt: 'eu adorei! é um quadrinho, curtinho, o paulo moreira é ótimo e eu sempre me divirto.', tag: 'gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/9dz2h6e8r2o0467pylx8vamkpsgy', title: 'a short stay in hell', author: 'steven l. peck', date: 'maio de 2026', excerpt: 'o fato de ser um livro curto conta muitos pontos pra mim, mas eu achei que tentou abordar assuntos demais dentro de muito pouco espaço e acabou não conseguindo fazer isso muito bem', tag: 'gostei mais ou menos' },
+                                { cover: 'https://cdn.thestorygraph.com/zicfgtznclyu4jkofxk4jh5xuq6z', title: 'memória de minhas putas tristes', author: 'gabriel garcía márquez', date: 'maio de 2026', excerpt: 'tenho minhas resistências com esse livro, é bem escrito mas é bem problemático também rs gostaria que não tivesse sido minha primeira experiência lendo gabriel garcía márquez', tag: 'gostei mais ou menos' },
+                                { cover: 'https://cdn.thestorygraph.com/10qy3meo4w36qiku0f39ci0hoqu3', title: 'ruins', author: 'peter kuper', date: 'maio de 2026', excerpt: 'um quadrinho, peguei na biblioteca pra ver minha aptidão pra ler quadrinhos. não me confirmou nem me negou nada e não engajei o suficiente com a história pra gostar dela', tag: 'não gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/unmqwn7ugxu8r8ydk39ixuq3ti56', title: 'a tirania das moscas', author: 'elaine vilar madruga', date: 'maio de 2026', excerpt: 'mexeu comigo mais do que eu gostaria de admitir, fiquei mais de uma semana sonhando com cenas do livro e pensando em disfuncionalidades familiares', tag: 'gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/4d2hcjcurvtxadpeqri8co1s0ztm', title: 'jillian', author: 'halle butler', date: 'março de 2026', excerpt: 'mais me irritou do que me divertiu. tem duas personagens insuportáveis que não se dão de jeito nenhum e são completamente diferentes, mas em resumo, não consegui ligar muito pra nenhuma delas', tag: 'não gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/x8q91nifuth4g021iao1mw4y6ptf', title: 'the dangers of smoking in bed', author: 'mariana enriquez', date: 'março de 2026', excerpt: 'AMO histórias curtas e amo terror, tive um tempo maravilhoso lendo esse livro. além de tudo é curtinho, foi embora em um dia', tag: 'gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/5jd4a83zemzk8fq5w0n4s2nd3fiy', title: 'eu que nunca conheci os homens', author: 'jacqueline harpman', date: 'março de 2026', excerpt: 'é um livro muito bem escrito, mas eu fui com expectativas muito diferentes e isso me atrapalhou um pouco de aproveitar ele', tag: 'gostei mais ou menos' },
+                                { cover: 'https://cdn.thestorygraph.com/jwakivpfvu2pvn7fgyxolip83buv', title: 'degola', author: 'monique malcher', date: 'março de 2026', excerpt: 'degola conta a história devastadora de uma menina que morou em uma ocupação em Manaus. me deu pesadelosssss. incrível. eu gostaria de conhecer melhor o processo de como a protagonista curou seus traumas, um pouco de quão difícil é passar por esse processo e como ela conseguiu sair "bem" como saiu no fim ', tag: 'gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/xltdhfz052rg1tr6bw980fzxk8lz', title: 'creep', author: 'emma van straaten', date: 'fevereiro de 2026', excerpt: 'é sobre uma stalker, não gostei muito do final, o livro eh meio mid. li bem rápido, é bem fast paced, mas o final é uma merda', tag: 'gostei mais ou menos' },
+                                { cover: 'https://cdn.thestorygraph.com/alo7bc7twoo4nigca1wkg5s6wcnt', title: 'kindred', author: 'octavia e. butler', date: 'janeiro de 2026', excerpt: 'muito bom! foi o primeiro livro longo que li depois de voltar com esse hábito e pra mim valeu a pena. queria mais tempo no presente, mostrando um pouco das dificuldades depois dela ter voltado', tag: 'gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/sh6u3l6x0x36zdqlf1p032ge8wim', title: 'everyone in this room will someday be dead', author: 'emily austin', date: 'janeiro de 2026', excerpt: 'mexeu comigo.eu gostei bastante desse!! amei estar na cabeça dessa personagem e amei ver o mundo pelos olhos dela. mexeu em tópicos que são sensíveis pra mim, como morte e religião, então de forma geral foi um livro que me fez sentir muitas coisas (que geralmente é o que espero quando leio algo)', tag: 'gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/8k871615wioiumpaoybm1ox1n95n', title: 'se deus me chamar não vou', author: 'mariana salomão carrara', date: '2026', excerpt: 'fofo e curtinho. chorei no final. mariana escreveu muito fielmente como as coisas são na cabeça de uma criança passando pelo que essa criança passava', tag: 'gostei mais ou menos' },
+                                { cover: 'https://cdn.thestorygraph.com/7cq98p0x1e1n8slz6sws51tzi7wq', title: 'a cabeça do santo', author: 'socorro acioli', date: '2026', excerpt: 'AMEI amo realismo mágico socorro acioli você me aguarde vou ler os outros', tag: 'gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/x0mnm447wrfw8wz2a96spnzkb1pe', title: 'a vida, o universo e tudo mais', author: 'douglas adams', date: 'dezembro de 2025', excerpt: 'eu amei. zaphod beeblebrox você sempre será famoso', tag: 'gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/6fv0yp3f57wbpkm1f8c2hxztvf7t', title: 'torto arado', author: 'itamar vieira junior', date: 'dezembro de 2025', excerpt: 'que DELÍCIA de livro meu deus do céu ouvi uma parte dele com a narração da zezé motta e eu não conseguia parar de chorar', tag: 'gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/dmbmj73zu78o5kr0kb545w2s828o', title: 'tudo é rio', author: 'carla madeira', date: '2025', excerpt: 'absurdo, absurdo, absurdo, lindo, chorei muito', tag: 'gostei muito' }
+                            ];
 
- <article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/73kszw0bzkilziqeqvg858vlez7b"
-         alt="capa de bom dia socorro">
-    <div class="book-info">
-        <span class="book-date">junho de 2026</span>
-        <h3 class="book-title">bom dia, socorro</h3>
-        <span class="book-author">paulo moreira</span>
-        <p class="book-excerpt">eu adorei! é um quadrinho, curtinho, o paulo moreira é ótimo e eu sempre me divirto.</p>
-        <span class="book-link">gostei muito</span>
-    </div>
-</article>
+                            // títulos que a storygraph guarda diferente do título que uso aqui (ex: edição em outro idioma)
+                            var TITLE_ALIASES = { 'i who have never known men': 'eu que nunca conheci os homens' };
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/9dz2h6e8r2o0467pylx8vamkpsgy"
-         alt="capa de a short stay in hell">
-    <div class="book-info">
-        <span class="book-date">maio de 2026</span>
-        <h3 class="book-title">a short stay in hell</h3>
-        <span class="book-author">steven l. peck</span>
-        <p class="book-excerpt">o fato de ser um livro curto conta muitos pontos pra mim, mas eu achei que tentou abordar assuntos demais dentro de muito pouco espaço e acabou não conseguindo fazer isso muito bem</p>
-        <span class="book-link">gostei mais ou menos</span>
-    </div>
-</article>
+                            function esc(s) {
+                                var d = document.createElement('div');
+                                d.textContent = s || '';
+                                return d.innerHTML;
+                            }
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/zicfgtznclyu4jkofxk4jh5xuq6z"
-         alt="capa de memória de minhas putas tristes">
-    <div class="book-info">
-        <span class="book-date">maio de 2026</span>
-        <h3 class="book-title">memória de minhas putas tristes</h3>
-        <span class="book-author">gabriel garcía márquez</span>
-        <p class="book-excerpt">tenho minhas resistências com esse livro, é bem escrito mas é bem problemático também rs gostaria que não tivesse sido minha primeira experiência lendo gabriel garcía márquez</p>
-        <span class="book-link">gostei mais ou menos</span>
-    </div>
-</article>
+                            function normTitle(t) {
+                                return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').split(':')[0].trim();
+                            }
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/10qy3meo4w36qiku0f39ci0hoqu3"
-         alt="capa de ruins">
-    <div class="book-info">
-        <span class="book-date">maio de 2026</span>
-        <h3 class="book-title">ruins</h3>
-        <span class="book-author">peter kuper</span>
-        <p class="book-excerpt">um quadrinho, peguei na biblioteca pra ver minha aptidão pra ler quadrinhos. não me confirmou nem me negou nada e não engajei o suficiente com a história pra gostar dela</p>
-        <span class="book-link">não gostei muito</span>
-    </div>
-</article>
+                            function findArchiveIndex(book) {
+                                var nt = normTitle(book.title);
+                                var aliased = TITLE_ALIASES[nt];
+                                return ARCHIVE.findIndex(function(a) {
+                                    var at = normTitle(a.title);
+                                    return at === nt || (aliased && at === aliased);
+                                });
+                            }
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/unmqwn7ugxu8r8ydk39ixuq3ti56"
-         alt="capa de a tirania das moscas">
-    <div class="book-info">
-        <span class="book-date">maio de 2026</span>
-        <h3 class="book-title">a tirania das moscas</h3>
-        <span class="book-author">elaine vilar madruga</span>
-        <p class="book-excerpt">mexeu comigo mais do que eu gostaria de admitir, fiquei mais de uma semana sonhando com cenas do livro e pensando em disfuncionalidades familiares</p>
-        <span class="book-link">gostei muito</span>
-    </div>
-</article>
+                            function renderEntry(e) {
+                                var title = (e.title || '').toLowerCase();
+                                var author = (e.author || '').toLowerCase();
+                                return '<article class="book-entry">' +
+                                    (e.cover ? '<img class="book-cover" src="' + esc(e.cover) + '" alt="capa de ' + esc(title) + '">' : '') +
+                                    '<div class="book-info">' +
+                                    (e.date ? '<span class="book-date">' + esc(e.date) + '</span>' : '') +
+                                    '<h3 class="book-title">' + esc(title) + '</h3>' +
+                                    '<span class="book-author">' + esc(author) + '</span>' +
+                                    '<p class="book-excerpt">' + esc(e.excerpt) + '</p>' +
+                                    (e.tag ? '<span class="book-link">' + esc(e.tag) + '</span>' : '') +
+                                    '</div></article>';
+                            }
 
+                            var TAG_ORDER = ['lendo', 'gostei muito', 'gostei', 'gostei mais ou menos', 'não gostei muito'];
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/4d2hcjcurvtxadpeqri8co1s0ztm"
-         alt="capa de jillian">
-    <div class="book-info">
-        <span class="book-date">março de 2026</span>
-        <h3 class="book-title">jillian</h3>
-        <span class="book-author">halle butler</span>
-        <p class="book-excerpt">mais me irritou do que me divertiu. tem duas personagens insuportáveis que não se dão de jeito nenhum e são completamente diferentes, mas em resumo, não consegui ligar muito pra nenhuma delas</p>
-        <span class="book-link">não gostei muito</span>
-    </div>
-</article>
+                            var MASONRY_ROW = 8;
+                            var MASONRY_GAP = 16;
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/x8q91nifuth4g021iao1mw4y6ptf"
-         alt="capa de the dangers of smoking in bed">
-    <div class="book-info">
-        <span class="book-date">março de 2026</span>
-        <h3 class="book-title">the dangers of smoking in bed</h3>
-        <span class="book-author">mariana enriquez</span>
-        <p class="book-excerpt">AMO histórias curtas e amo terror, tive um tempo maravilhoso lendo esse livro. além de tudo é curtinho, foi embora em um dia</p>
-        <span class="book-link">gostei muito</span>
-    </div>
-</article>
+                            function layoutMasonry() {
+                                list.querySelectorAll('.book-entry').forEach(function(entry) {
+                                    var h = entry.getBoundingClientRect().height;
+                                    var span = Math.ceil((h + MASONRY_GAP) / (MASONRY_ROW + MASONRY_GAP));
+                                    entry.style.gridRowEnd = 'span ' + span;
+                                });
+                            }
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/5jd4a83zemzk8fq5w0n4s2nd3fiy"
-         alt="capa de eu que nunca conheci os homens">
-    <div class="book-info">
-        <span class="book-date">março de 2026</span>
-        <h3 class="book-title">eu que nunca conheci os homens</h3>
-        <span class="book-author">jacqueline harpman</span>
-        <p class="book-excerpt">é um livro muito bem escrito, mas eu fui com expectativas muito diferentes e isso me atrapalhou um pouco de aproveitar ele</p>
-        <span class="book-link">gostei mais ou menos</span>
-    </div>
-</article>
+                            function renderList(entries, tag) {
+                                var filtered = tag === 'todos' ? entries : entries.filter(function(e) { return e.tag === tag; });
+                                list.innerHTML = filtered.map(renderEntry).join('');
+                                layoutMasonry();
+                                list.querySelectorAll('.book-cover').forEach(function(img) {
+                                    if (!img.complete) {
+                                        img.addEventListener('load', layoutMasonry);
+                                        img.addEventListener('error', layoutMasonry);
+                                    }
+                                });
+                            }
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/jwakivpfvu2pvn7fgyxolip83buv"
-         alt="capa de degola">
-    <div class="book-info">
-        <span class="book-date">março de 2026</span>
-        <h3 class="book-title">degola</h3>
-        <span class="book-author">monique malcher</span>
-        <p class="book-excerpt">degola conta a história devastadora de uma menina que morou em uma ocupação em Manaus. me deu pesadelosssss. incrível. eu gostaria de conhecer melhor o processo de como a protagonista curou seus traumas, um pouco de quão difícil é passar por esse processo e como ela conseguiu sair "bem" como saiu no fim </p>
-        <span class="book-link">gostei muito</span>
-    </div>
-</article>
+                            var masonryResizeTimer;
+                            window.addEventListener('resize', function() {
+                                clearTimeout(masonryResizeTimer);
+                                masonryResizeTimer = setTimeout(layoutMasonry, 150);
+                            });
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/xltdhfz052rg1tr6bw980fzxk8lz"
-         alt="capa de creep">
-    <div class="book-info">
-        <span class="book-date">fevereiro de 2026</span>
-        <h3 class="book-title">creep</h3>
-        <span class="book-author">emma van straaten</span>
-        <p class="book-excerpt">é sobre uma stalker, não gostei muito do final, o livro eh meio mid. li bem rápido, é bem fast paced, mas o final é uma merda</p>
-        <span class="book-link">gostei mais ou menos</span>
-    </div>
-</article>
+                            function renderFilters(entries) {
+                                var present = TAG_ORDER.filter(function(tag) {
+                                    return entries.some(function(e) { return e.tag === tag; });
+                                });
+                                filterBar.innerHTML = ['todos'].concat(present).map(function(tag) {
+                                    return '<button type="button" class="verdict-btn' + (tag === 'todos' ? ' active' : '') + '" data-tag="' + esc(tag) + '">' + esc(tag) + '</button>';
+                                }).join('');
+                                filterBar.querySelectorAll('.verdict-btn').forEach(function(btn) {
+                                    btn.addEventListener('click', function() {
+                                        filterBar.querySelectorAll('.verdict-btn').forEach(function(b) { b.classList.remove('active'); });
+                                        btn.classList.add('active');
+                                        renderList(entries, btn.dataset.tag);
+                                    });
+                                });
+                            }
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/alo7bc7twoo4nigca1wkg5s6wcnt"
-         alt="capa de kindred">
-    <div class="book-info">
-        <span class="book-date">janeiro de 2026</span>
-        <h3 class="book-title">kindred</h3>
-        <span class="book-author">octavia e. butler</span>
-        <p class="book-excerpt">muito bom! foi o primeiro livro longo que li depois de voltar com esse hábito e pra mim valeu a pena. queria mais tempo no presente, mostrando um pouco das dificuldades depois dela ter voltado</p>
-        <span class="book-link">gostei muito</span>
-    </div>
-</article>
+                            function render(entries) {
+                                renderFilters(entries);
+                                renderList(entries, 'todos');
+                            }
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/sh6u3l6x0x36zdqlf1p032ge8wim"
-         alt="capa de everyone in this room will someday be dead">
-    <div class="book-info">
-        <span class="book-date">janeiro de 2026</span>
-        <h3 class="book-title">everyone in this room will someday be dead</h3>
-        <span class="book-author">emily austin</span>
-        <p class="book-excerpt">mexeu comigo.eu gostei bastante desse!! amei estar na cabeça dessa personagem e amei ver o mundo pelos olhos dela. mexeu em tópicos que são sensíveis pra mim, como morte e religião, então de forma geral foi um livro que me fez sentir muitas coisas (que geralmente é o que espero quando leio algo)</p>
-        <span class="book-link">gostei muito</span>
-    </div>
-</article>
+                            fetch('https://wyd.doce.sh/api/storygraph/bibiareads')
+                                .then(function(res) { if (!res.ok) throw new Error('bad response'); return res.json(); })
+                                .then(function(data) {
+                                    var crConsumedIdx = {};
+                                    var crEntries = (data.currentlyReading || []).map(function(book) {
+                                        var idx = findArchiveIndex(book);
+                                        if (idx !== -1) {
+                                            // se o arquivo já diz que não tá mais "lendo" (ex: abandonado), confio nisso
+                                            // em vez do que a storygraph ainda mostra como em andamento
+                                            if (ARCHIVE[idx].tag !== 'lendo') return null;
+                                            crConsumedIdx[idx] = true;
+                                            return ARCHIVE[idx];
+                                        }
+                                        return { cover: book.cover, title: book.title, author: book.author, date: '', excerpt: '', tag: 'lendo' };
+                                    }).filter(function(e) { return e !== null; });
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/8k871615wioiumpaoybm1ox1n95n"
-         alt="capa de se deus me chamar não vou">
-    <div class="book-info">
-        <span class="book-date">2026</span>
-        <h3 class="book-title">se deus me chamar não vou</h3>
-        <span class="book-author">mariana salomão carrara</span>
-        <p class="book-excerpt">fofo e curtinho. chorei no final. mariana escreveu muito fielmente como as coisas são na cabeça de uma criança passando pelo que essa criança passava</p>
-        <span class="book-link">gostei mais ou menos</span>
-    </div>
-</article>
+                                    var newReadEntries = (data.read || [])
+                                        .filter(function(book) { return findArchiveIndex(book) === -1; })
+                                        .map(function(book) {
+                                            return { cover: book.cover, title: book.title, author: book.author, date: '', excerpt: '', tag: '' };
+                                        });
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/7cq98p0x1e1n8slz6sws51tzi7wq"
-         alt="capa de a cabeça do santo">
-    <div class="book-info">
-        <span class="book-date">2026</span>
-        <h3 class="book-title">a cabeça do santo</h3>
-        <span class="book-author">socorro acioli</span>
-        <p class="book-excerpt">AMEI amo realismo mágico socorro acioli você me aguarde vou ler os outros</p>
-        <span class="book-link">gostei muito</span>
-    </div>
-</article>
+                                    var archiveReadEntries = ARCHIVE.filter(function(a, i) { return !crConsumedIdx[i] && a.tag !== 'abandonado'; });
 
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/x0mnm447wrfw8wz2a96spnzkb1pe"
-         alt="capa de a vida, o universo e tudo mais">
-    <div class="book-info">
-        <span class="book-date">dezembro de 2025</span>
-        <h3 class="book-title">a vida, o universo e tudo mais</h3>
-        <span class="book-author">douglas adams</span>
-        <p class="book-excerpt">eu amei. zaphod beeblebrox você sempre será famoso</p>
-        <span class="book-link">gostei muito</span>
-    </div>
-</article>
-
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/6fv0yp3f57wbpkm1f8c2hxztvf7t"
-         alt="capa de torto arado">
-    <div class="book-info">
-        <span class="book-date">dezembro de 2025</span>
-        <h3 class="book-title">torto arado</h3>
-        <span class="book-author">itamar vieira junior</span>
-        <p class="book-excerpt">que DELÍCIA de livro meu deus do céu ouvi uma parte dele com a narração da zezé motta e eu não conseguia parar de chorar</p>
-        <span class="book-link">gostei muito</span>
-    </div>
-</article>
-
-<article class="book-entry">
-    <img class="book-cover"
-         src="https://cdn.thestorygraph.com/dmbmj73zu78o5kr0kb545w2s828o"
-         alt="capa de tudo é rio">
-    <div class="book-info">
-        <span class="book-date">2025</span>
-        <h3 class="book-title">tudo é rio</h3>
-        <span class="book-author">carla madeira</span>
-        <p class="book-excerpt">absurdo, absurdo, absurdo, lindo, chorei muito</p>
-        <span class="book-link">gostei muito</span>
-    </div>
-</article>
-                    </div>
+                                    render(crEntries.concat(newReadEntries, archiveReadEntries));
+                                })
+                                .catch(function() { render(ARCHIVE.filter(function(a) { return a.tag !== 'abandonado'; })); });
+                        })();
+                    </script>
                 </div>
             </section>
             <aside class="sidebar-right"></aside>
@@ -308,6 +227,6 @@
         <small class="mobile-notice"><span data-i18n-en="this site looks kinda rough on mobile. sorry! 🌻">esse site fica meio paia no mobile. me desculpa! 🌻</span></small>
     </div>
 
-    <script src="script.js?v=20260717"></script>
+    <script src="script.js?v=20260822"></script>
 </body>
 </html>

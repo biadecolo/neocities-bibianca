@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-en="bibi's web corner">moodboard – webcantinho da bia</title>
+    <link rel="stylesheet" href="style.css?v=20260822">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/porquinho.png">
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://a.doce.sh/js/pa-MqS-ZH1OYWx0aYhiF3Hmj.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <style data-page-specific>
+      .moodboard-status { font-size: 0.8rem; color: #888; }
+    </style>
+</head>
+<body>
+    <div class="background-overlay">
+        <div class="main-window">
+            <aside class="sidebar"></aside>
+
+            <section class="content-area">
+                <div class="content-box">
+                    <h2 data-i18n-en="moodboard">moodboard</h2>
+                    <p data-i18n-en="things i found around the internet that i think are funny or relate to me">coisas que eu encontrei pela internet e que acho engraçadinhas ou tem a ver comigo</p>
+
+                    <p class="moodboard-status" id="moodboard-status" data-i18n-en="loading pins from pinterest…">carregando os pins do pinterest…</p>
+                    <div class="gallery-grid" id="moodboard-grid"></div>
+
+                    <script>
+                        (function() {
+                            const grid = document.getElementById('moodboard-grid');
+                            const status = document.getElementById('moodboard-status');
+                            if (!grid || !status) return;
+                            if (typeof COMMENTS_API === 'undefined' || typeof initGalleryLightbox === 'undefined') return;
+
+                            fetch(`${COMMENTS_API}/moodboard`)
+                                .then(res => { if (!res.ok) throw new Error('bad response'); return res.json(); })
+                                .then(data => {
+                                    const items = data.items || [];
+                                    if (items.length === 0) throw new Error('no items');
+
+                                    grid.innerHTML = items.map(item => `
+                                        <div class="gallery-item">
+                                            <img src="${item.image}" alt="moodboard" loading="lazy">
+                                        </div>
+                                    `).join('');
+
+                                    status.remove();
+                                    initGalleryLightbox();
+                                })
+                                .catch(() => {
+                                    status.textContent = 'não consegui carregar as fotos agora, tenta de novo daqui a pouco 🥲';
+                                });
+                        })();
+                    </script>
+                </div>
+            </section>
+            <aside class="sidebar-right"></aside>
+        </div>
+
+        <div id="footer-placeholder"></div>
+        <small class="mobile-notice"><span data-i18n-en="this site looks kinda rough on mobile. sorry! 🌻">esse site fica meio paia no mobile. me desculpa! 🌻</span></small>
+    </div>
+
+    <div id="image-modal" class="modal" onclick="this.style.display='none'">
+        <div class="retro-window" onclick="event.stopPropagation()">
+            <div class="retro-titlebar">
+                <span class="retro-title">🖼 image.jpg</span>
+                <span class="close-modal" onclick="document.getElementById('image-modal').style.display='none'">✕</span>
+            </div>
+            <div class="retro-window-body">
+                <img class="modal-content" id="modal-img">
+                <div id="modal-caption"></div>
+                <div class="modal-keyhint"><span class="key-cap">←</span><span class="key-cap">→</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=20260822"></script>
+</body>
+</html>
