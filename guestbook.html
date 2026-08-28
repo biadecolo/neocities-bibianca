@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-en="bibi's web corner">guestbook – webcantinho da bia</title>
+    <link rel="stylesheet" href="style.css?v=20260822">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/porquinho.png">
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://a.doce.sh/js/pa-MqS-ZH1OYWx0aYhiF3Hmj.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <style data-page-specific>
+      .comments-section[data-page-id="guestbook"] .comments-form {
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid var(--accent-green);
+      }
+      .comments-section[data-page-id="guestbook"] .comments-field-row {
+        display: flex;
+        gap: 12px;
+      }
+      .comments-section[data-page-id="guestbook"] .comments-field-row .comments-field {
+        flex: 1;
+        min-width: 0;
+      }
+    </style>
+</head>
+<body>
+    <div class="background-overlay">
+        <div class="main-window">
+            <aside class="sidebar"></aside>
+            <section class="content-area">
+                <div class="content-box">
+                    <h2 class="section-title" data-i18n-en="guestbook">guestbook</h2>
+                    <p data-i18n-en="leave your little note so i know you stopped by 🐷">deixa seu recadinho pra eu saber que você passou por aqui 🐷</p>
+
+                    <div class="comments-section" data-page-id="guestbook">
+                        <form class="comments-form">
+                            <div class="comments-field-row">
+                                <label class="comments-field">
+                                    <span data-i18n-en="name">nome</span>
+                                    <input type="text" name="author" maxlength="60" required>
+                                </label>
+                                <label class="comments-field">
+                                    <span data-i18n-en="site (optional)">site (opcional)</span>
+                                    <input type="text" name="site" maxlength="200" placeholder="seusite.com">
+                                </label>
+                            </div>
+                            <label class="comments-field">
+                                <span data-i18n-en="message">recado</span>
+                                <textarea name="body" maxlength="2000" required></textarea>
+                            </label>
+                            <label class="comments-hp" aria-hidden="true">
+                                <input type="text" name="hp" tabindex="-1" autocomplete="off">
+                            </label>
+                            <button type="submit" data-i18n-en="send">enviar</button>
+                            <p class="comments-form-status" hidden></p>
+                        </form>
+                        <ul class="comments-list"></ul>
+                        <p class="comments-empty" hidden></p>
+                        <p class="comments-error" data-i18n-en="couldn't load the guestbook right now." hidden>não foi possível carregar o guestbook agora.</p>
+                    </div>
+                </div>
+            </section>
+            <aside class="sidebar-right"></aside>
+        </div>
+        <div id="footer-placeholder"></div>
+        <small class="mobile-notice"><span data-i18n-en="this site looks kinda rough on mobile. sorry! 🌻">esse site fica meio paia no mobile. me desculpa! 🌻</span></small>
+    </div>
+
+    <script src="script.js?v=20260822"></script>
+</body>
+</html>

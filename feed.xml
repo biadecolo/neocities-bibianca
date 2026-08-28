@@ -2,36 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
     <title>blog – webcantinho da bia</title>
-    <link>https://bibianca.neocities.org/blog.html</link>
-    <atom:link href="https://bibianca.neocities.org/feed.xml" rel="self" type="application/rss+xml" />
+    <link>https://falodemais.neocities.org/blog.html</link>
+    <atom:link href="https://falodemais.neocities.org/feed.xml" rel="self" type="application/rss+xml" />
     <description>pensamentos soltos, maiores que uma linha de changelog e menores que um diário</description>
     <language>pt-br</language>
 
     <item>
         <title>a saga da máquina de lavar</title>
-        <link>https://bibianca.neocities.org/a-saga-da-maquina-de-lavar.html</link>
-        <guid>https://bibianca.neocities.org/a-saga-da-maquina-de-lavar.html</guid>
+        <link>https://falodemais.neocities.org/a-saga-da-maquina-de-lavar.html</link>
+        <guid>https://falodemais.neocities.org/a-saga-da-maquina-de-lavar.html</guid>
         <description>toda a saga de se livrar de uma máquina de lavar de 13 anos e finalmente instalar a nova</description>
         <pubDate>Mon, 17 Aug 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
         <title>sempre erro a dose</title>
-        <link>https://bibianca.neocities.org/sempre-erro-a-dose.html</link>
-        <guid>https://bibianca.neocities.org/sempre-erro-a-dose.html</guid>
+        <link>https://falodemais.neocities.org/sempre-erro-a-dose.html</link>
+        <guid>https://falodemais.neocities.org/sempre-erro-a-dose.html</guid>
         <description>é comum, mais do que deveria, que eu erre a dose. um texto antigo, resgatado do dia 4 de junho de 2022, pro dia 2 do BEDA</description>
         <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
         <title>recap julho</title>
-        <link>https://bibianca.neocities.org/recap-julho.html</link>
-        <guid>https://bibianca.neocities.org/recap-julho.html</guid>
+        <link>https://falodemais.neocities.org/recap-julho.html</link>
+        <guid>https://falodemais.neocities.org/recap-julho.html</guid>
         <description>pra começar o BEDA, um recap do mês que acabou de acabar: o que rolou, o que assisti, o que li e o que ouvi</description>
         <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
         <title>dez curiosidades</title>
-        <link>https://bibianca.neocities.org/dez-curiosidades.html</link>
-        <guid>https://bibianca.neocities.org/dez-curiosidades.html</guid>
+        <link>https://falodemais.neocities.org/dez-curiosidades.html</link>
+        <guid>https://falodemais.neocities.org/dez-curiosidades.html</guid>
         <description>participando de uma colab do entreblogs: dez fatos aleatórios sobre a minha vida, de seita a paraglider</description>
         <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
     </item>

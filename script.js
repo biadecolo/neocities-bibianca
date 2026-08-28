@@ -429,12 +429,14 @@ function renderComment(c, ctx) {
         actions.appendChild(del);
     }
 
-    const reply = document.createElement('button');
-    reply.type = 'button';
-    reply.className = 'comment-reply';
-    reply.textContent = 'responder';
-    reply.addEventListener('click', () => startCommentReply(c, li, ctx, adminToken));
-    actions.appendChild(reply);
+    if (ctx.pageId !== 'guestbook' || adminToken) {
+        const reply = document.createElement('button');
+        reply.type = 'button';
+        reply.className = 'comment-reply';
+        reply.textContent = 'responder';
+        reply.addEventListener('click', () => startCommentReply(c, li, ctx, adminToken));
+        actions.appendChild(reply);
+    }
 
     li.appendChild(actions);
 
@@ -642,6 +644,7 @@ function loadComments(section, pageId) {
             }
 
             const topLevel = comments.filter(c => !c.parent_id);
+            if (pageId === 'guestbook') topLevel.reverse();
             const repliesByRoot = {};
             comments.filter(c => c.parent_id).forEach(c => {
                 const rootId = rootIdOf(c);
