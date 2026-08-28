@@ -82,7 +82,7 @@ html {
 .background-overlay > *:first-child {
     margin-top: auto;
 }
-.background-overlay > *:last-child {
+.background-overlay > #footer-placeholder {
     margin-bottom: auto;
 }
 .spacer40px{
