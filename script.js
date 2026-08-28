@@ -5,6 +5,18 @@
     document.head.appendChild(s);
 })();
 
+function loadSiteBanner() {
+    const overlay = document.querySelector('.background-overlay');
+    const mainWindow = document.querySelector('.main-window');
+    if (!overlay || !mainWindow || overlay.querySelector('.site-banner-gif')) return;
+
+    const img = document.createElement('img');
+    img.src = '/assets/falodemais.gif';
+    img.alt = 'fala de mais';
+    img.className = 'site-banner-gif';
+    overlay.insertBefore(img, mainWindow);
+}
+
 async function loadSidebar() {
     const aside = document.querySelector('aside.sidebar');
     if (!aside) return;
@@ -764,6 +776,7 @@ function initContent(container) {
     executeInlineScripts(container);
 }
 
+loadSiteBanner();
 loadSidebar();
 loadSidebarRight();
 loadFooter();
