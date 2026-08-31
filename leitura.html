@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n-en="bibi's web corner">leitura – webcantinho da bia</title>
-    <link rel="stylesheet" href="style.css?v=20260828">
+    <link rel="stylesheet" href="style.css?v=20260830">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/porquinho.png">
     <!-- Privacy-friendly analytics by Plausible -->
-    <script async src="https://a.doce.sh/js/pa-MqS-ZH1OYWx0aYhiF3Hmj.js"></script>
+    <script async src="https://a.doce.sh/js/pa-smOw3jpGUPlxcGmDXYosz.js"></script>
     <script>
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
       plausible.init()
@@ -62,7 +62,7 @@
             <section class="content-area">
                 <div class="content-box">
                     <h2 data-i18n-en="reading">leitura</h2>
-                    <p data-i18n-en="thanks to my friend &lt;mark&gt;&lt;a href=&quot;https://doce.sh&quot; target=&quot;_blank&quot;&gt;doce&lt;/a&gt;&lt;/mark&gt;, this page now just pulls the books straight from storygraph. thank you, friend, you're the best!!">graças ao meu amigo <mark><a href="https://doce.sh" target="_blank">doce</a></mark>, agora essa página simplesmente puxa os livros diretamente do storygraph. obrigada, amigo, você arrasa demais!!</p>
+                    <p data-i18n-en="thanks to my friend &lt;mark&gt;&lt;a href=&quot;https://wyd.doce.sh&quot; target=&quot;_blank&quot;&gt;doce&lt;/a&gt;&lt;/mark&gt;, this page now just pulls the books straight from storygraph. thank you, friend, you're the best!!">graças ao meu amigo <mark><a href="https://wyd.doce.sh" target="_blank">doce</a></mark>, agora essa página simplesmente puxa os livros diretamente do storygraph. obrigada, amigo, você arrasa demais!!</p>
                     <div class="verdict-filter" id="verdict-filter"></div>
                     <div class="book-list" id="book-list"></div>
 
@@ -74,6 +74,8 @@
 
                             // arquivo dos livros com meus comentários e tags — preservado mesmo quando a API não trouxer o livro
                             var ARCHIVE = [
+                                { cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPAZUFqdmpT7n7GaIAE3KlmO51nD8Sy2zgjG0BgCtiog&s=10', title: 'a palavra que resta', author: 'stênio gardel', date: 'agosto de 2026', excerpt: 'que gracinha de livro. quebrou meu coração em mil pedacinhos. vi uma querida falando sobre como outros personagens (o pai dele, a suzanný) foram muito mais desenvolvidos do que o raimundo. gostaria muito de saber mais. o final dele fez sentido, mas eu gostaria muito que fosse diferente. gostei da forma como o raimundo fala, gosto dos elementos da vivência dele, gostei da maioria das coisas. no final, descobri que o stênio gardel é aluno da socorro acioli e isso foi muito massa.', tag: 'gostei muito' },
+                                { cover: 'https://cdn.thestorygraph.com/oyx2qg5vitu0oyhfk9n3ggkw9qyp', title: 'não fossem as sílabas de sábado', author: 'mariana salomão carrara', date: 'agosto de 2026', excerpt: 'esse livro é perfeito. é triste, é doloroso, é lindo, é arrebatador, me fez sentir tantas emoções diferentes. ele relata tão bem sobre o luto, sobre a dor, sobre a transformação que acontece dentro da gente e fora também. fala da dor de preencher o espaço que alguém que se foi ocupou. talvez eu faça um texto separado falando desse livro, pq ele é toda uma experiência por si só, mas eu vou com certeza reler ele em algum momento.', tag: 'gostei muito' },
                                 { cover: 'https://cdn.thestorygraph.com/aj63mzmah9b9dzh48w56585ffc8w', title: 'the metamorphosis', author: 'franz kafka', date: '', excerpt: 'comecei a ouvir esse na ida e terminei ele na volta da viagem. gostei muito, só não sei bem o que sentir com o final.', tag: 'gostei muito' },
                                 { cover: 'https://cdn.thestorygraph.com/jztibk5xvnynw7mh7hfw0orhbzuh', title: 'animal farm', author: 'george orwell', date: '', excerpt: 'ouvi esse no caminho pra arraial do cabo e gostei um bocado. tô tentando ouvir os clássicos pra ver se me comprometo a saber como são, já que nem sempre engajo muito com a leitura deles. a narração desse livro no audible é muito boa!', tag: 'gostei' },
                                 { cover: 'https://cdn.thestorygraph.com/wffza7rcf1xxvzmkpyfbawnkbrp8', title: 'nós', author: 'tamara klink', date: 'julho de 2026', excerpt: '', tag: 'abandonado' },
@@ -100,7 +102,7 @@
                             ];
 
                             // títulos que a storygraph guarda diferente do título que uso aqui (ex: edição em outro idioma)
-                            var TITLE_ALIASES = { 'i who have never known men': 'eu que nunca conheci os homens' };
+                            var TITLE_ALIASES = { 'i who have never known men': 'eu que nunca conheci os homens', 'nao fossem as silabas do sabado': 'nao fossem as silabas de sabado' };
 
                             function esc(s) {
                                 var d = document.createElement('div');
@@ -227,6 +229,6 @@
         <small class="mobile-notice"><span data-i18n-en="this site looks kinda rough on mobile. sorry! 🌻">esse site fica meio paia no mobile. me desculpa! 🌻</span></small>
     </div>
 
-    <script src="script.js?v=20260828"></script>
+    <script src="script.js?v=20260830"></script>
 </body>
 </html>

@@ -729,30 +729,6 @@ html.home::-webkit-scrollbar-button,
             margin-bottom: 0;
         }
 
-        .blog-rss-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 10px;
-            text-decoration: none;
-            color: #aaa;
-            font-size: 0.68rem;
-            line-height: 1.4;
-            opacity: 0.7;
-        }
-
-        .blog-rss-row:hover {
-            opacity: 1;
-            color: #888;
-        }
-
-        .blog-rss-icon {
-            width: 13px;
-            height: 13px;
-            display: block;
-            flex-shrink: 0;
-        }
-
         .blog-list {
             display: flex;
             flex-direction: column;
