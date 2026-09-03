@@ -637,14 +637,14 @@ function loadComments(section, pageId) {
     const errorEl = section.querySelector('.comments-error');
 
     list.innerHTML = '';
-    empty.hidden = true;
+    if (empty) empty.hidden = true;
     errorEl.hidden = true;
 
     fetch(`${COMMENTS_API}/comments?pageId=${encodeURIComponent(pageId)}`)
         .then(res => { if (!res.ok) throw new Error('bad status'); return res.json(); })
         .then(data => {
             const comments = data.comments || [];
-            if (comments.length === 0) { empty.hidden = false; return; }
+            if (comments.length === 0) { if (empty) empty.hidden = false; return; }
 
             const byId = {};
             comments.forEach(c => { byId[c.id] = c; });
